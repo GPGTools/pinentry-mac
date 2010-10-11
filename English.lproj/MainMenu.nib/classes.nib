@@ -1,0 +1,22 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {CancelPressedAction = id; HideTypingAction = id; OKPressedAction = id; }; 
+            CLASS = PinentryController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                CancelButton = NSButton; 
+                ErrorBox = NSTextField; 
+                HideTypingButton = NSButton; 
+                InstructionBox = NSTextView; 
+                OKButton = NSButton; 
+                PINField = NSSecureTextField; 
+                PINText = NSTextField; 
+                plainPINField = NSTextField; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

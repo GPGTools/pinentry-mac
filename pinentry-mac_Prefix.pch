@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'pinentry-mac' target in the 'pinentry-mac' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
