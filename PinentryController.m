@@ -98,7 +98,8 @@ PinentryController *cInstance;
 {
 	[InstructionBox setHidden: NO];
 //	[InstructionBox setStringValue: NewText];
-	[[[InstructionBox textStorage] mutableString] setString: NewText];
+//	[[[InstructionBox textStorage] mutableString] setString: NewText];
+	[InstructionBox setStringValue: NewText ];
 }
 
 - (void) setErrorText: (NSString *) NewText

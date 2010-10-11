@@ -23,7 +23,7 @@
 {
  @private
     IBOutlet NSButton *CancelButton;
-    IBOutlet NSTextView *InstructionBox;
+    IBOutlet NSTextField *InstructionBox;
     IBOutlet NSButton *OKButton;
 	IBOutlet NSButton *HideTypingButton;
     IBOutlet NSSecureTextField *PINField;
