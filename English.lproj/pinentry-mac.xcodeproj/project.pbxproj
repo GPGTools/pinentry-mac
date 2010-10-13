@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1FA4293B0E716E0C0007F59B /* APPL.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1FA4293A0E716E0C0007F59B /* APPL.icns */; };
-		1FA4293E0E716E1A0007F59B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FA4293C0E716E1A0007F59B /* Info.plist */; };
 		432325EC0A2B8CD9003EDF4B /* mac-gpg-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 432325EB0A2B8CD9003EDF4B /* mac-gpg-logo.png */; };
 		4354B56E0A29D531003EB704 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 4354B56D0A29D531003EB704 /* COPYING */; };
 		438EE3050A1C6E570005741F /* assuan-buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 438EE2FD0A1C6E560005741F /* assuan-buffer.c */; };
@@ -219,7 +218,6 @@
 				4354B56E0A29D531003EB704 /* COPYING in Resources */,
 				432325EC0A2B8CD9003EDF4B /* mac-gpg-logo.png in Resources */,
 				1FA4293B0E716E0C0007F59B /* APPL.icns in Resources */,
-				1FA4293E0E716E1A0007F59B /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,14 +284,12 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
-				INFOPLIST_FILE = English.lproj/Info.plist;
+				INFOPLIST_FILE = "";
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = "pinentry-mac";
 				WRAPPER_EXTENSION = app;
