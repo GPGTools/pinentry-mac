@@ -1,0 +1,435 @@
+\input texinfo                      @c -*-texinfo-*-
+@c %**start of header
+@setfilename pinentry.info
+
+@include version.texi
+
+@macro copyrightnotice
+Copyright @copyright{} 2002, 2005 g10 Code GmbH
+@end macro
+@macro permissionnotice
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or (at your
+option) any later version. The text of the license can be found in the
+section entitled ``Copying''.
+@end macro
+
+@macro pinentry
+@sc{pinentry}
+@end macro
+
+@settitle Using the PIN-Entry
+
+@c Create a separate index for command line options.
+@defcodeindex op
+@c Merge the standard indexes into a single one.
+@syncodeindex fn cp
+@syncodeindex vr cp
+@syncodeindex ky cp
+@syncodeindex pg cp
+@syncodeindex tp cp
+
+@c printing stuff taken from gcc.
+@macro gnupgtabopt{body}
+@code{\body\}
+@end macro
+@macro gnupgoptlist{body}
+@smallexample
+\body\
+@end smallexample
+@end macro
+@c Makeinfo handles the above macro OK, TeX needs manual line breaks;
+@c they get lost at some point in handling the macro.  But if @macro is
+@c used here rather than @alias, it produces double line breaks.
+@iftex
+@alias gol = *
+@end iftex
+@ifnottex
+@macro gol
+@end macro
+@end ifnottex
+
+
+@c Change the font used for @def... commands, since the default
+@c proportional one used is bad for names starting __.
+@tex
+\global\setfont\defbf\ttbshape{10}{\magstep1}
+@end tex
+
+@c %**end of header
+
+@ifnottex
+@dircategory GNU Utilities
+@direntry
+* pinentry: (pinentry).    Ask securely for a passphrase or PIN.
+@end direntry
+This file documents the use and the internals of the @pinentry{}.
+
+This is edition @value{EDITION}, last updated @value{UPDATED}, of
+@cite{The `PINEntry' Manual}, for version @value{VERSION}.
+@sp 1
+Published by g10 Code GmbH@*
+Hüttenstr. 61@*
+40699 Erkrath, Germany
+@sp 1
+@copyrightnotice{}
+@sp 1
+@permissionnotice{}
+@end ifnottex
+
+@setchapternewpage odd
+
+@titlepage
+@title Using the PIN-Entry
+@subtitle Version @value{VERSION}
+@subtitle @value{UPDATED}
+@author Werner Koch @code{(wk@@gnupg.org)}
+
+@page
+@vskip 0pt plus 1filll
+@copyrightnotice{}
+@sp 2
+@permissionnotice{}
+@end titlepage
+@summarycontents
+@contents
+@page
+
+
+@node Top
+@top Introduction
+@cindex introduction
+
+This manual documents how to use the @pinentry{} and its protocol.
+
+The @pinentry{} is a small GUI application used to enter PINs or
+passphrases. It is usually invoked by @sc{gpg-agent}
+(@pxref{Invoking GPG-AGENT, ,Invoking the gpg-agent, gnupg,
+    The `GNU Privacy Guard' Manual}, for details).       
+
+@pinentry{} comes in 3 flavors to fit the look and feel of the used
+GUI toolkit:  A @sc{GTK+} based one named @code{pinentry-gtk}, a
+@sc{Qt} based one named @code{pinentry-qt} and a non-graphical one based
+on curses and named @code{pinentry-curses}.  Not all of them might be
+available on your installation.  If curses is supported on your system,
+the GUI based flavors fall back to curses when the @code{DISPLAY}
+variable is not set.
+
+
+@menu
+* Using pinentry::      How to use the beast.
+
+Developer information
+
+* Protocol::            The Assuan protocol description.
+
+Miscellaneous
+
+* Copying::             GNU General Public License says
+                        how you can copy and share PIN-Entry
+                        as well as this manual.
+
+Indices
+
+* Option Index::        Index to command line options.
+* Index::	        Index of concepts and symbol names.
+@end menu
+
+@node Using pinentry
+@chapter How to use the @pinentry{}
+
+@c man begin DESCRIPTION
+
+You may run @pinentry{} directly from the command line and pass the
+commands according to the Assuan protocol via stdin/stdout.
+
+
+@c man end
+
+@c man begin OPTIONS
+
+Here is a list of options supported by all 3 flavors of pinentry
+
+@table @gnupgtabopt
+@item --version
+@opindex version
+Print the program version and licensing information. 
+
+@item --help
+@opindex help
+Print a usage message summarizing the most useful command line options.
+
+@item --debug
+@itemx -d
+@opindex debug
+@opindex d
+Turn on some debugging.  Mostly useful for the maintainers.  Note that
+this may reveal sensitive information like the entered passphrase.
+
+@c @item --enhanced
+@c @itemx -e
+@c @opindex enhanced
+@c @opindex e
+@c Ask for timeouts and insurance, too.  Note that this is currently not
+@c fully supported.
+
+@item --no-global-grab
+@itemx -g
+@opindex no-global-grab
+@opindex g
+Grab the keyboard only when the window is focused.  Use this option if
+you are debugging software using the @pinentry{}; otherwise you may
+not be able to to access your X session anymore (unless you have other
+means to connect to the machine to kill the @pinentry{}).
+
+@item --parent-wid @var{n}
+@opindex parent-wid
+Use window ID @var{n} as the parent window for positioning the window.
+Note, that this is not fully supported by all flavors of @pinentry{}.
+
+@item --display @var{string}
+@itemx --ttyname @var{string}
+@itemx --ttytype @var{string}
+@itemx --lc-ctype @var{string}
+@itemx --lc-messages @var{string}
+@opindex display 
+@opindex ttyname 
+@opindex ttytype 
+@opindex lc-ctype 
+@opindex lc-messa
+These options are used to pass localization information to
+@pinentry{}.  They are required because @pinentry{} is usually called
+by some background process which does not have any information on the
+locale and terminal to use.  Assuan protocol options are an
+alternative way to pass these information.
+@end table
+
+@c 
+@c  Assuan Protocol
+@c
+@node Protocol
+@chapter pinentry's Assuan Protocol
+
+The PIN-Entry should never service more than one connection at once.
+It is reasonable to exec the PIN-Entry prior to a request.
+
+The PIN-Entry does not need to stay in memory because the
+@sc{gpg-agent} has the ability to cache passphrases.  The usual way to
+run the PIN-Entry is by setting up a pipe (and not a socket) and then
+fork/exec the PIN-Entry.  The communication is then done by means of
+the protocol described here until the client is satisfied with the
+result.
+
+Although it is called a PIN-Entry, it does allow to enter reasonably
+long strings (at least 2048 characters are supported by every
+pinentry).  The client using the PIN-Entry has to check for
+correctness.
+
+Note that all strings are expected to be encoded as UTF-8; @pinentry{}
+takes care of converting it to the locally used codeset.  To include
+linefeeds or other special characters, you may percent-escape them
+(i.e. a line feed is encoded as @code{%0A}, the percent sign itself
+is encoded as @code{%25}).
+
+Here is the list of supported commands:
+
+@table @gnupgtabopt
+
+@item Set the descriptive text to be displayed
+@example
+  C: SETDESC Enter PIN for Richard Nixon <nobody@@trickydicky.gov>
+  S: OK
+@end example
+
+@item Set the prompt to be shown
+When asking for a PIN, set the text just before the widget for
+passphrase entry.
+@example
+  C: SETPROMPT PIN:
+  S: OK
+@end example
+
+You should use an underscore in the text only if you known that a modern
+version of pinentry is used.  Modern versions underline the next
+character after the underscore and use the first such underlined
+character as a keyboard accelerator.  Use a double underscore to escape
+an underscore.
+
+@item Set the window title
+This command may be used to change the default window title.  When
+using this feature you should take care that the window is still
+identifiable as the pinentry.
+@example
+  C: SETTITLE Tape Recorder Room
+  S: OK
+@end example
+
+@item Set the button texts
+There are three texts which should be used to override the English
+defaults:
+
+To set the text for the button signaling confirmation (in UTF-8).
+See SETPROMPT on how to use an keyboard accelerator.
+@example
+  C: SETOK Yes
+  S: OK
+@end example
+
+
+To set the text for the button signaling cancellation or disagreement
+(in UTF-8).  See SETPROMPT on how to use an keyboard accelerator.
+@example
+  C: SETCANCEL No
+  S: OK
+@end example
+
+
+In case tree buttons are required, use the follwing command to set the
+text (UTF-8) for the non-affirmative response button.  The affirmative button
+text is still set using SETOK and the CANCEL button text with SETCANCEL.
+See SETPROMPT on how to use an keyboard accelerator.
+@example
+  C: SETNOTOK Do not do this
+  S: OK
+@end example
+
+
+
+@item Set the Error text
+This is used by the client to display an error message.  In contrast
+to the other commands this error message is automatically reset with
+a GETPIN or CONFIRM, and is only displayed when asking for a PIN.
+@example
+  C: SETERROR Invalid PIN entered - please try again
+  S: OK
+@end example
+
+@item Enable a passphrase quality indicator
+Adds a quality indicator to the GETPIN window.  This indicator is
+updated as the passphrase is typed.  The clients needs to implement an
+inquiry named "QUALITY" which gets passed the current passpharse
+(percent-plus escaped) and should send back a string with a single
+numerical vauelue between -100 and 100.  Negative values will be
+displayed in red.
+@example
+  C: SETQUALITYBAR
+  S: OK
+@end example
+
+If a custom label for the quality bar is required, just add that label
+as an argument as percent escaped string.  You will need this feature to
+translate the label because pinentry has no internal gettext except for
+stock strings from the toolkit library.
+
+If you want to show a tooltip for the quality bar, you may use
+@example
+  C: SETQUALITYBAR_TT string
+  S: OK
+@end example
+
+@noindent
+With STRING being a percent escaped string shown as the tooltip.
+
+
+@item Ask for a PIN
+The meat of this tool is to ask for a passphrase of PIN, it is done with
+this command:
+@example
+  C: GETPIN
+  S: D no more tapes
+  S: OK
+@end example
+Note that the passphrase is transmitted in clear using standard data
+responses.  Expect it to be in UTF-8.
+
+@item Ask for confirmation
+To ask for a confirmation (yes or no), you can use this command:
+@example
+  C: CONFIRM
+  S: OK
+@end example
+The client should use SETDESC to set an appropriate text before
+issuing this command, and may use SETPROMPT to set the button texts.
+The value returned is either OK for YES or the error code
+@code{ASSUAN_Not_Confirmed}.
+
+@item Show a message
+To show a message, you can use this command:
+@example
+  C: MESSAGE
+  S: OK
+@end example
+alternativly you may add an option to confirm:
+@example
+  C: CONFIRM --one-button
+  S: OK
+@end example
+The client should use SETDESC to set an appropriate text before issuing
+this command, and may use SETOK to set the text for the dismiss button.
+The value returned is OK or an error message.
+
+@item Set the output device
+When using X, the @pinentry{} program must be invoked with an
+appropriate @code{DISPLAY} environment variable or the
+@code{--display} option.
+
+When using a text terminal:
+@example
+  C: OPTION ttyname=/dev/tty3
+  S: OK
+  C: OPTION ttytype=vt100
+  S: OK
+  C: OPTION lc-ctype=de_DE.UTF-8
+  S: OK
+@end example
+The client should use the @code{ttyname} option to set the output TTY
+file name, the @code{ttytype} option to the @code{TERM} variable
+appropriate for this tty and @code{lc-ctype} to the locale which
+defines the character set to use for this terminal.
+
+@item Set the default strings
+To avoid having transaltions in Pinentry proper, the caller may set
+certain translated strings which are used by Pinentry as default
+strings.
+
+@example
+  C: OPTION default-ok=_Korrekt
+  S: OK
+  C: OPTION default-cancel=Abbruch
+  S: OK
+  C: OPTION default-prompt=PIN eingeben:
+  S: OK
+@end example
+The strings are subject to accelerator marking, see SETPROMPT for
+details.
+
+@end table
+
+@c ---------------------------------------------------------------------
+@c Legal Blurbs
+@c ---------------------------------------------------------------------
+
+@include gpl.texi
+
+@c ---------------------------------------------------------------------
+@c Indexes
+@c ---------------------------------------------------------------------
+
+@node Option Index
+@unnumbered Option Index
+
+@printindex op
+
+@node Index
+@unnumbered Index
+
+@printindex cp
+
+@c ---------------------------------------------------------------------
+@c Epilogue
+@c ---------------------------------------------------------------------
+
+@bye
+
+

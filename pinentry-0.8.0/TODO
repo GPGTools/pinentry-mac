@@ -1,0 +1,24 @@
+* The DISPLAY setting should be honoured by the pinentry applications
+  using XFree86.  This implies reconfiguring the underlying toolkit,
+  is this always possible?
+  (This is not so important, as pinentry is always restarted.)
+
+* The Qt and curses PIN entry should support enhanced mode (when it is
+  implemented in gpg-agent).  We need to agree on a protocol to use
+  anyway.
+
+* The Qt pinentry uses QT's private QTextLayout.
+
+* Set the max length of password globally (dynamically in protocol?).
+
+* A heartbeat status message should be sent every few seconds, so that
+  the gpg-agent is better able to cope with jammed pinentries.
+
+* The gtk+-2 pinentry needs auditing.
+
+* Implement the one_button feature in Qt.
+
+* The format of the Assuan protocol description should be changed to
+  the one used by GnuPG.
+  
+* The SETTITLE command is only implemented for GTK+-2
