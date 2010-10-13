@@ -57,6 +57,7 @@
 		438EE3190A1C70B80005741F /* PinentryController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PinentryController.h; sourceTree = "<group>"; };
 		438EE31A0A1C70B80005741F /* PinentryController.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = PinentryController.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* pinentry-mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pinentry-mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC4C79FD1265EC9C009AA295 /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/MainMenu.nib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +259,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				29B97319FDCFA39411CA2CEA /* English */,
+				DC4C79FD1265EC9C009AA295 /* German */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
