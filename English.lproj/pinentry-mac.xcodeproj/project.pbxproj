@@ -289,7 +289,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = English.lproj/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = "pinentry-mac";
 				WRAPPER_EXTENSION = app;
