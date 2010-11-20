@@ -130,6 +130,8 @@ struct pinentry
      to save the assuan ctx.  */
   void *ctx_assuan;
 
+  char *cache_id;
+
 };
 typedef struct pinentry *pinentry_t;
 
