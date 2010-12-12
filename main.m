@@ -22,7 +22,6 @@
  Programm erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
-#define VERSION "0.2"
 
 #import <Cocoa/Cocoa.h>
 #include "pinentry.h"
@@ -39,7 +38,12 @@ int main(int argc, char *argv[]) {
 	
 	/* Consumes all arguments.  */
 	if (pinentry_parse_opts(argc, argv)) {
-		printf("pinentry-mac (pinentry) " VERSION "\n");
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+		
+		const char *version = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] UTF8String];
+		printf("pinentry-mac (pinentry) %s \n", version);
+		
+		[pool drain];
 		return 0;
     }
 	

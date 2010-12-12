@@ -2,7 +2,7 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* The GUI pinentries should fall back to curses if X is not available. */
-/* #define FALLBACK_CURSES 1 */
+#define FALLBACK_CURSES 1
 
 /* Defined if the mlock() call does not work */
 /* #undef HAVE_BROKEN_MLOCK */
@@ -121,7 +121,7 @@
 #define PACKAGE_VERSION "0.8.0"
 
 /* The Curses version of Pinentry is to be build */
-/* #define PINENTRY_CURSES 1 */
+#define PINENTRY_CURSES 1
 
 /* The GTK+ version of Pinentry is to be build */
 /* #undef PINENTRY_GTK */
