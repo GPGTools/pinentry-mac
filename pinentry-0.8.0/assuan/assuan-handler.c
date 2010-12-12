@@ -203,7 +203,6 @@ static struct {
 
   { "INPUT",  ASSUAN_CMD_INPUT,  std_handler_input },
   { "OUTPUT", ASSUAN_CMD_OUTPUT, std_handler_output },
-  { "OPTION", ASSUAN_CMD_OPTION, std_handler_option, 1 },
   { NULL }
 };
 

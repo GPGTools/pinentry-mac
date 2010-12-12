@@ -39,6 +39,9 @@
 		305E2C4B129734A100CF5467 /* KeychainSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainSupport.h; sourceTree = "<group>"; };
 		305E2C4C129734A100CF5467 /* KeychainSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainSupport.m; sourceTree = "<group>"; };
 		305E2D08129734E300CF5467 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		30FC956B129819310039CEF8 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Pinentry.xib.strings; sourceTree = "<group>"; };
+		30FC956D129819390039CEF8 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Pinentry.xib.strings; sourceTree = "<group>"; };
+		30FC957412981A040039CEF8 /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/Pinentry.xib; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
 		432325EB0A2B8CD9003EDF4B /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		4354B56D0A29D531003EB704 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
@@ -123,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				30FC94801297E81A0039CEF8 /* Pinentry.xib */,
+				30FC956A129819310039CEF8 /* Pinentry.xib.strings */,
 				1FA4293A0E716E0C0007F59B /* Icon.icns */,
 				432325EB0A2B8CD9003EDF4B /* logo.png */,
 				1FA4293D0E716E1A0007F59B /* Info.plist */,
@@ -170,6 +174,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "pinentry-mac" */;
 			buildPhases = (
+				30FC955F129818AE0039CEF8 /* Localize XIBs */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
@@ -222,6 +227,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		30FC955F129818AE0039CEF8 /* Localize XIBs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Localize XIBs";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "pushd $SRCROOT > /dev/null\n\nUtilities/localizeXIB English.lproj/Pinentry.xib German\n\npopd > /dev/null";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -250,8 +272,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				305E276A1296AE9500CF5467 /* English */,
+				30FC957412981A040039CEF8 /* German */,
 			);
 			name = Pinentry.xib;
+			sourceTree = "<group>";
+		};
+		30FC956A129819310039CEF8 /* Pinentry.xib.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30FC956B129819310039CEF8 /* English */,
+				30FC956D129819390039CEF8 /* German */,
+			);
+			name = Pinentry.xib.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

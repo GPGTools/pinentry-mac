@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="812"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -46,7 +45,7 @@
 				<string key="NSWindowContentMaxSize">{900, 500}</string>
 				<string key="NSWindowContentMinSize">{540, 179}</string>
 				<object class="NSView" key="NSWindowView" id="734060865">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -138,7 +137,7 @@
 							<object class="NSButtonCell" key="NSCell" id="1047643643">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents">Cancel</string>
+								<string key="NSContents">Abbrechen</string>
 								<reference key="NSSupport" ref="167248716"/>
 								<reference key="NSControlView" ref="341536898"/>
 								<int key="NSButtonFlags">-2038284033</int>
@@ -153,13 +152,13 @@
 						<object class="NSButton" id="238022209">
 							<reference key="NSNextResponder" ref="734060865"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{17, 12}, {87, 18}}</string>
+							<string key="NSFrame">{{17, 12}, {72, 18}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="561651655">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">131072</int>
-								<string key="NSContents">Show typing</string>
+								<string key="NSContents">Anzeigen</string>
 								<object class="NSFont" key="NSSupport" id="26">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">11</double>
@@ -168,6 +167,10 @@
 								<reference key="NSControlView" ref="238022209"/>
 								<int key="NSButtonFlags">1211912703</int>
 								<int key="NSButtonFlags2">2</int>
+								<object class="NSCustomResource" key="NSNormalImage" id="388711250">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">NSSwitch</string>
+								</object>
 								<object class="NSButtonImageSource" key="NSAlternateImage" id="1063867142">
 									<string key="NSImageName">NSSwitch</string>
 								</object>
@@ -277,17 +280,18 @@
 						<object class="NSButton" id="329908687">
 							<reference key="NSNextResponder" ref="734060865"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{115, 12}, {111, 18}}</string>
+							<string key="NSFrame">{{92, 12}, {158, 18}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="1045977157">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">131072</int>
-								<string key="NSContents">Save in Keychain</string>
+								<string key="NSContents">Im Schlüsselbund sichern</string>
 								<reference key="NSSupport" ref="26"/>
 								<reference key="NSControlView" ref="329908687"/>
 								<int key="NSButtonFlags">1211912703</int>
 								<int key="NSButtonFlags2">2</int>
+								<reference key="NSNormalImage" ref="388711250"/>
 								<reference key="NSAlternateImage" ref="1063867142"/>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
@@ -297,7 +301,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{540, 179}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
 				<string key="NSMinSize">{540, 201}</string>
@@ -516,7 +519,7 @@
 							<string key="NSKeyPath">cancelButtonText</string>
 							<object class="NSDictionary" key="NSOptions">
 								<string key="NS.key.0">NSNullPlaceholder</string>
-								<string key="NS.object.0">Cancel</string>
+								<string key="NS.object.0">Abbrechen</string>
 							</object>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
@@ -1189,8 +1192,17 @@
 		<string key="IBDocument.LastKnownRelativeProjectPath">../pinentry-mac.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">logo</string>
-			<string key="NS.object.0">{255.071, 255.071}</string>
+			<bool key="EncodedWithXMLCoder">YES</bool>
+			<object class="NSArray" key="dict.sortedKeys">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>NSSwitch</string>
+				<string>logo</string>
+			</object>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{15, 15}</string>
+				<string>{255.071, 255.071}</string>
+			</object>
 		</object>
 	</data>
 </archive>
