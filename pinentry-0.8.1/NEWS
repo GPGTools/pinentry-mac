@@ -1,0 +1,186 @@
+Noteworthy changes in version 0.8.1 (2010-12-16)
+------------------------------------------------
+
+ * The W32 pinentry now supports WindowsCE.
+
+ * The GTK pinentry now always sticks to the top and properly grabs
+   the keyboard.
+
+ * The protocol options default-cancel and default-ok now work for the
+   pinentry-gtk2 and pinentry-qt (that is QT3).
+
+
+Noteworthy changes in version 0.8.0 (2010-03-03)
+------------------------------------------------
+
+ * Beautified the qt4 pinentry
+
+ * Minor enhancements.
+
+
+Noteworthy changes in version 0.7.6 (2009-06-19)
+------------------------------------------------
+
+ * Make Gtk+-2 pinentry transient to the root window.
+
+ * Add Qt4 pinentry.
+
+ * Add native W32 pinentry.
+
+ * Fix utf-8 problem in Qt pinentries.
+
+ * Return GPG_ERR_CANCELED if during a "CONFIRM" command the user
+   closed the window.
+
+ * Add quality bar.
+
+Noteworthy changes in version 0.7.5 (2008-02-15)
+------------------------------------------------
+
+ * Fix cross compilation for Gtk+-2 pinentry.
+
+ * New Assuan command GETINFO with subcommands "version" and "pid".
+
+
+Noteworthy changes in version 0.7.4 (2007-11-29)
+------------------------------------------------
+
+ * Pinentry-gtk-2 and pinentry-qt now support a simple passphrase
+   quality indicator. 
+
+
+Noteworthy changes in version 0.7.3 (2007-07-06)
+------------------------------------------------
+
+ * New command MESSAGE and --one-button compatibility option to
+   CONFIRM.
+
+ * New Assuan option touch-file to set a file which will be touched
+   after ncurses does not need the display anymore.
+
+ * New option --colors=FG,BG,SO to set the colors for the curses
+   pinentry.
+
+ * Pinentry-w32 does now basicaly work.  It needs some finishing
+   though.  For example the buttons should resize themself according
+   to the size of the text.
+
+
+Noteworthy changes in version 0.7.2 (2005-01-27)
+------------------------------------------------
+
+ * Remove bug in configure script that would use installed version of
+   Qt even if another path was explicitely specified with QTDIR.
+
+ * Honor the rpath setting for Qt.
+
+ * Add GTK+-2 pinentry.
+
+ * Install a symbolic link under the name "pinentry" that defaults to
+   pinentry-gtk, pinentry-qt, pinentry-gtk-2, or pinentry-curses, in
+   that order.
+
+
+Noteworthy changes in version 0.7.1 (2004-04-21)
+------------------------------------------------
+
+ * Removed unneeded Assuan cruft.
+
+ * Fixes for *BSD.
+
+
+Noteworthy changes in version 0.7.0 (2003-12-23)
+------------------------------------------------
+
+ * Make UTF8 description (prompt, error message, button texts) work.
+
+ * Make sure that secmem_term is called before program termination.
+
+ * Make assuan in Gtk and Curses pinentry use secure memory for
+   storage.
+
+ * Fixed a bug that would occur if a canceled GETPIN was immediately
+   followed by a CONFIRM.
+
+ * Disabled undo/redo in Qt pinentry.
+
+ * Print diagnostics for locale problems and return a new error code
+   in that case.
+
+
+Noteworthy changes in version 0.6.8 (2003-02-07)
+------------------------------------------------
+
+ * Bug fix in pinentry-qt.
+
+Noteworthy changes in version 0.6.7 (2002-11-20)
+------------------------------------------------
+
+ * Workaround for a bug in the curses version which led to an infinite
+   loop.
+
+Noteworthy changes in version 0.6.6 (2002-11-09)
+------------------------------------------------
+
+ * Fixed handling of DISPLAY and --display for the sake of the curses
+   fallback.
+
+ * UTF-8 conversion does now work for the GTK+ and CURSES version.
+
+
+Noteworthy changes in version 0.6.5 (2002-09-30)
+------------------------------------------------
+
+  * Handle Assuan options in the qt version.
+
+Noteworthy changes in version 0.6.4 (2002-08-19)
+------------------------------------------------
+
+  * Handle CONFIRM command in the qt version.
+
+Noteworthy changes in version 0.6.3 (2002-06-26)
+------------------------------------------------
+
+  * Minor bug fixes to the qt version.
+
+Noteworthy changes in version 0.6.2 (2002-05-13)
+------------------------------------------------
+
+  * Error texts can now be percent-escaped.
+
+  * The Curses pinentry supports multi-line error texts.
+
+  * The GTK+ and Qt pinentry can fall back to curses if no display is
+    available.
+
+Noteworthy changes in version 0.6.1 (2002-04-25)
+------------------------------------------------
+
+  * The Curses pinentry supports user-provided button texts via the
+    new SETOK and SETCANCEL commands.
+
+  * The Curses pinentry supports setting the desired character set
+    locale with --lc-ctype and correctly translates the UTF-8 strings
+    into that.
+
+Noteworthy changes in version 0.6.0 (2002-04-05)
+------------------------------------------------
+
+  * Merged all pinentry frontends into a single module.
+
+  * There is now a Curses frontend.
+
+  * The curses pinentry supports --ttyname and --ttytype options to
+    set the desired input/output terminal and its type.
+
+Noteworthy changes in version 0.5.1 (2002-02-18)
+------------------------------------------------
+
+  * CONFIRM command works
+
+Noteworthy changes in version 0.5.0 (2002-01-04)
+------------------------------------------------
+
+ * Window layout is somewhat nicer
+
+ * percent escape sequences do now work for SETDESC and SETERROR
