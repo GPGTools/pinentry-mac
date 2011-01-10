@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="812"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -46,7 +45,7 @@
 				<string key="NSWindowContentMaxSize">{900, 500}</string>
 				<string key="NSWindowContentMinSize">{540, 179}</string>
 				<object class="NSView" key="NSWindowView" id="734060865">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -168,7 +167,7 @@
 								<reference key="NSControlView" ref="238022209"/>
 								<int key="NSButtonFlags">1211912703</int>
 								<int key="NSButtonFlags2">2</int>
-								<object class="NSCustomResource" key="NSNormalImage" id="330945367">
+								<object class="NSCustomResource" key="NSNormalImage" id="388711250">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">NSSwitch</string>
 								</object>
@@ -292,7 +291,7 @@
 								<reference key="NSControlView" ref="329908687"/>
 								<int key="NSButtonFlags">1211912703</int>
 								<int key="NSButtonFlags2">2</int>
-								<reference key="NSNormalImage" ref="330945367"/>
+								<reference key="NSNormalImage" ref="388711250"/>
 								<reference key="NSAlternateImage" ref="1063867142"/>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
@@ -302,7 +301,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{540, 179}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
 				<string key="NSMinSize">{540, 201}</string>
@@ -754,6 +752,14 @@
 					</object>
 					<int key="connectionID">938</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">showTypingButton</string>
+						<reference key="source" ref="1021"/>
+						<reference key="destination" ref="238022209"/>
+					</object>
+					<int key="connectionID">939</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1058,7 +1064,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABC5gAAweAAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABC4AAAweAAAA</bytes>
 					</object>
 					<boolean value="YES"/>
 				</object>
@@ -1079,7 +1085,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">938</int>
+			<int key="maxID">939</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1125,10 +1131,12 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
 							<string>okButton</string>
+							<string>showTypingButton</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSWindow</string>
@@ -1140,6 +1148,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
 							<string>okButton</string>
+							<string>showTypingButton</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1150,6 +1159,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">okButton</string>
+								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">showTypingButton</string>
 								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">

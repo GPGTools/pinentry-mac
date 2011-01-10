@@ -24,7 +24,6 @@
 
 
 @implementation PinentryController : NSWindowController
-@synthesize gpgDefaults;
 @synthesize descriptionText;
 @synthesize promptText;
 @synthesize errorText;
@@ -34,13 +33,13 @@
 @synthesize oneButton;
 @synthesize saveInKeychain;
 @synthesize canUseKeychain;
+@synthesize showType;
 
 PinentryController *_sharedInstance = nil;
 
 - (id)init {
 	self = [super init];
 	
-	gpgDefaults = [[GPGDefaults gpgDefaults] retain];
 	
 	descriptionText = nil;
 	promptText = nil;
@@ -54,7 +53,8 @@ PinentryController *_sharedInstance = nil;
 	okPressed = NO;
 	canUseKeychain = NO;
 	
-	saveInKeychain = [gpgDefaults boolForKey:@"GPGUsesKeychain"];
+	showType = [[GPGDefaults gpgDefaults] boolForKey:@"GPGShowsPassphrase"];
+	saveInKeychain = [[GPGDefaults gpgDefaults] boolForKey:@"GPGUsesKeychain"];
 
 	[NSApplication sharedApplication];
 	[NSBundle loadNibNamed:@"Pinentry" owner:self];

@@ -15,7 +15,6 @@
  Programm erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
-@class GPGDefaults;
 
 @interface PinentryController : NSWindowController {
 	IBOutlet NSWindow *window;
@@ -23,7 +22,6 @@
 	IBOutlet NSButton *cancelButton;
 	IBOutlet NSButton *showTypingButton;
 	
-	GPGDefaults *gpgDefaults;
 	
 	NSString *descriptionText;
 	NSString *promptText;
@@ -39,8 +37,8 @@
 	BOOL okPressed;
 	BOOL saveInKeychain;
 	BOOL canUseKeychain;
+	BOOL showType;
 }
-@property (readonly) GPGDefaults *gpgDefaults;
 @property (assign) NSWindow *window;
 @property (retain) NSString *descriptionText;
 @property (retain) NSString *promptText;
@@ -53,6 +51,7 @@
 @property BOOL oneButton;
 @property BOOL saveInKeychain;
 @property BOOL canUseKeychain;
+@property BOOL showType;
 
 
 - (NSInteger)runModal;

@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10H574</string>
-		<string key="IBDocument.InterfaceBuilderVersion">804</string>
+		<string key="IBDocument.SystemVersion">10J567</string>
+		<string key="IBDocument.InterfaceBuilderVersion">823</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.HIToolboxVersion">462.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">804</string>
+			<string key="NS.object.0">823</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -548,164 +548,6 @@
 					<int key="connectionID">909</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: gpgDefaults.GPGShowsPassphrase</string>
-						<reference key="source" ref="238022209"/>
-						<reference key="destination" ref="1021"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="238022209"/>
-							<reference key="NSDestination" ref="1021"/>
-							<string key="NSLabel">value: gpgDefaults.GPGShowsPassphrase</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">gpgDefaults.GPGShowsPassphrase</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">911</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">enabled: gpgDefaults.GPGShowsPassphrase</string>
-						<reference key="source" ref="14498297"/>
-						<reference key="destination" ref="1021"/>
-						<object class="NSNibBindingConnector" key="connector" id="300681138">
-							<reference key="NSSource" ref="14498297"/>
-							<reference key="NSDestination" ref="1021"/>
-							<string key="NSLabel">enabled: gpgDefaults.GPGShowsPassphrase</string>
-							<string key="NSBinding">enabled</string>
-							<string key="NSKeyPath">gpgDefaults.GPGShowsPassphrase</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">915</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">hidden: gpgDefaults.GPGShowsPassphrase</string>
-						<reference key="source" ref="14498297"/>
-						<reference key="destination" ref="1021"/>
-						<object class="NSNibBindingConnector" key="connector" id="4928919">
-							<reference key="NSSource" ref="14498297"/>
-							<reference key="NSDestination" ref="1021"/>
-							<string key="NSLabel">hidden: gpgDefaults.GPGShowsPassphrase</string>
-							<string key="NSBinding">hidden</string>
-							<string key="NSKeyPath">gpgDefaults.GPGShowsPassphrase</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValueTransformerName</string>
-								<string key="NS.object.0">NSNegateBoolean</string>
-							</object>
-							<reference key="NSPreviousConnector" ref="300681138"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">920</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">hidden2: confirmMode</string>
-						<reference key="source" ref="14498297"/>
-						<reference key="destination" ref="1021"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="14498297"/>
-							<reference key="NSDestination" ref="1021"/>
-							<string key="NSLabel">hidden2: confirmMode</string>
-							<string key="NSBinding">hidden2</string>
-							<string key="NSKeyPath">confirmMode</string>
-							<object class="NSDictionary" key="NSOptions">
-								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSArray" key="dict.sortedKeys">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<string>NSMultipleValuesPlaceholder</string>
-									<string>NSNoSelectionPlaceholder</string>
-									<string>NSNotApplicablePlaceholder</string>
-									<string>NSNullPlaceholder</string>
-								</object>
-								<object class="NSMutableArray" key="dict.values">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<integer value="-1"/>
-									<integer value="-1"/>
-									<integer value="-1"/>
-									<integer value="-1"/>
-								</object>
-							</object>
-							<reference key="NSPreviousConnector" ref="4928919"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">921</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">enabled: gpgDefaults.GPGShowsPassphrase</string>
-						<reference key="source" ref="429744192"/>
-						<reference key="destination" ref="1021"/>
-						<object class="NSNibBindingConnector" key="connector" id="929354629">
-							<reference key="NSSource" ref="429744192"/>
-							<reference key="NSDestination" ref="1021"/>
-							<string key="NSLabel">enabled: gpgDefaults.GPGShowsPassphrase</string>
-							<string key="NSBinding">enabled</string>
-							<string key="NSKeyPath">gpgDefaults.GPGShowsPassphrase</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValueTransformerName</string>
-								<string key="NS.object.0">NSNegateBoolean</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">929</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">hidden: gpgDefaults.GPGShowsPassphrase</string>
-						<reference key="source" ref="429744192"/>
-						<reference key="destination" ref="1021"/>
-						<object class="NSNibBindingConnector" key="connector" id="1007880301">
-							<reference key="NSSource" ref="429744192"/>
-							<reference key="NSDestination" ref="1021"/>
-							<string key="NSLabel">hidden: gpgDefaults.GPGShowsPassphrase</string>
-							<string key="NSBinding">hidden</string>
-							<string key="NSKeyPath">gpgDefaults.GPGShowsPassphrase</string>
-							<reference key="NSPreviousConnector" ref="929354629"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">930</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">hidden2: confirmMode</string>
-						<reference key="source" ref="429744192"/>
-						<reference key="destination" ref="1021"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="429744192"/>
-							<reference key="NSDestination" ref="1021"/>
-							<string key="NSLabel">hidden2: confirmMode</string>
-							<string key="NSBinding">hidden2</string>
-							<string key="NSKeyPath">confirmMode</string>
-							<object class="NSDictionary" key="NSOptions">
-								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSArray" key="dict.sortedKeys">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<string>NSMultipleValuesPlaceholder</string>
-									<string>NSNoSelectionPlaceholder</string>
-									<string>NSNotApplicablePlaceholder</string>
-									<string>NSNullPlaceholder</string>
-								</object>
-								<object class="NSMutableArray" key="dict.values">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<integer value="-1"/>
-									<integer value="-1"/>
-									<integer value="-1"/>
-									<integer value="-1"/>
-								</object>
-							</object>
-							<reference key="NSPreviousConnector" ref="1007880301"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">931</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">nextKeyView</string>
 						<reference key="source" ref="329908687"/>
@@ -756,6 +598,164 @@
 						<reference key="destination" ref="238022209"/>
 					</object>
 					<int key="connectionID">939</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: showType</string>
+						<reference key="source" ref="238022209"/>
+						<reference key="destination" ref="1021"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="238022209"/>
+							<reference key="NSDestination" ref="1021"/>
+							<string key="NSLabel">value: showType</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">showType</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">940</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: showType</string>
+						<reference key="source" ref="14498297"/>
+						<reference key="destination" ref="1021"/>
+						<object class="NSNibBindingConnector" key="connector" id="361114633">
+							<reference key="NSSource" ref="14498297"/>
+							<reference key="NSDestination" ref="1021"/>
+							<string key="NSLabel">enabled: showType</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">showType</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">941</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">hidden: showType</string>
+						<reference key="source" ref="14498297"/>
+						<reference key="destination" ref="1021"/>
+						<object class="NSNibBindingConnector" key="connector" id="657459884">
+							<reference key="NSSource" ref="14498297"/>
+							<reference key="NSDestination" ref="1021"/>
+							<string key="NSLabel">hidden: showType</string>
+							<string key="NSBinding">hidden</string>
+							<string key="NSKeyPath">showType</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">NSNegateBoolean</string>
+							</object>
+							<reference key="NSPreviousConnector" ref="361114633"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">944</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">hidden2: confirmMode</string>
+						<reference key="source" ref="14498297"/>
+						<reference key="destination" ref="1021"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="14498297"/>
+							<reference key="NSDestination" ref="1021"/>
+							<string key="NSLabel">hidden2: confirmMode</string>
+							<string key="NSBinding">hidden2</string>
+							<string key="NSKeyPath">confirmMode</string>
+							<object class="NSDictionary" key="NSOptions">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSArray" key="dict.sortedKeys">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>NSMultipleValuesPlaceholder</string>
+									<string>NSNoSelectionPlaceholder</string>
+									<string>NSNotApplicablePlaceholder</string>
+									<string>NSNullPlaceholder</string>
+								</object>
+								<object class="NSMutableArray" key="dict.values">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<integer value="-1"/>
+									<integer value="-1"/>
+									<integer value="-1"/>
+									<integer value="-1"/>
+								</object>
+							</object>
+							<reference key="NSPreviousConnector" ref="657459884"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">945</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: showType</string>
+						<reference key="source" ref="429744192"/>
+						<reference key="destination" ref="1021"/>
+						<object class="NSNibBindingConnector" key="connector" id="232612273">
+							<reference key="NSSource" ref="429744192"/>
+							<reference key="NSDestination" ref="1021"/>
+							<string key="NSLabel">enabled: showType</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">showType</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">NSNegateBoolean</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">946</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">hidden: showType</string>
+						<reference key="source" ref="429744192"/>
+						<reference key="destination" ref="1021"/>
+						<object class="NSNibBindingConnector" key="connector" id="618420156">
+							<reference key="NSSource" ref="429744192"/>
+							<reference key="NSDestination" ref="1021"/>
+							<string key="NSLabel">hidden: showType</string>
+							<string key="NSBinding">hidden</string>
+							<string key="NSKeyPath">showType</string>
+							<reference key="NSPreviousConnector" ref="232612273"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">949</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">hidden2: confirmMode</string>
+						<reference key="source" ref="429744192"/>
+						<reference key="destination" ref="1021"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="429744192"/>
+							<reference key="NSDestination" ref="1021"/>
+							<string key="NSLabel">hidden2: confirmMode</string>
+							<string key="NSBinding">hidden2</string>
+							<string key="NSKeyPath">confirmMode</string>
+							<object class="NSDictionary" key="NSOptions">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSArray" key="dict.sortedKeys">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>NSMultipleValuesPlaceholder</string>
+									<string>NSNoSelectionPlaceholder</string>
+									<string>NSNotApplicablePlaceholder</string>
+									<string>NSNullPlaceholder</string>
+								</object>
+								<object class="NSMutableArray" key="dict.values">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<integer value="-1"/>
+									<integer value="-1"/>
+									<integer value="-1"/>
+									<integer value="-1"/>
+								</object>
+							</object>
+							<reference key="NSPreviousConnector" ref="618420156"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">950</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1082,7 +1082,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">939</int>
+			<int key="maxID">950</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1190,7 +1190,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">logo</string>
-			<string key="NS.object.0">{255.071, 255.071}</string>
+			<string key="NS.object.0">{512, 512}</string>
 		</object>
 	</data>
 </archive>
