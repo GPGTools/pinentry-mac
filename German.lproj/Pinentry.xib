@@ -2,16 +2,25 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10J567</string>
-		<string key="IBDocument.InterfaceBuilderVersion">823</string>
+		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">462.00</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">823</string>
+			<string key="NS.object.0">1306</string>
 		</object>
-		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
+		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<string>NSTextField</string>
+			<string>NSView</string>
+			<string>NSWindowTemplate</string>
+			<string>NSTextFieldCell</string>
+			<string>NSButtonCell</string>
+			<string>NSImageCell</string>
+			<string>NSImageView</string>
+			<string>NSButton</string>
+			<string>NSCustomObject</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -54,6 +63,7 @@
 							<int key="NSvFlags">290</int>
 							<string key="NSFrame">{{166, 45}, {354, 23}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
+							<reference key="NSNextKeyView" ref="14498297"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="49685725">
 								<int key="NSCellFlags">-1805517247</int>
@@ -91,6 +101,7 @@
 							<int key="NSvFlags">-2147483358</int>
 							<string key="NSFrame">{{166, 45}, {354, 23}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
+							<reference key="NSNextKeyView" ref="238022209"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="127701410">
 								<int key="NSCellFlags">-1805517247</int>
@@ -133,6 +144,7 @@
 							<int key="NSvFlags">289</int>
 							<string key="NSFrame">{{306, 6}, {110, 32}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
+							<reference key="NSNextKeyView" ref="386080157"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="1047643643">
 								<int key="NSCellFlags">67239424</int>
@@ -154,6 +166,7 @@
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{17, 12}, {72, 18}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
+							<reference key="NSNextKeyView" ref="329908687"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="561651655">
 								<int key="NSCellFlags">67239424</int>
@@ -167,7 +180,7 @@
 								<reference key="NSControlView" ref="238022209"/>
 								<int key="NSButtonFlags">1211912703</int>
 								<int key="NSButtonFlags2">2</int>
-								<object class="NSCustomResource" key="NSNormalImage" id="940342193">
+								<object class="NSCustomResource" key="NSNormalImage" id="822263728">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">NSSwitch</string>
 								</object>
@@ -197,6 +210,7 @@
 							</object>
 							<string key="NSFrame">{{7, 78}, {73, 75}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
+							<reference key="NSNextKeyView" ref="84543454"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="238493472">
 								<int key="NSCellFlags">130560</int>
@@ -217,6 +231,7 @@
 							<int key="NSvFlags">274</int>
 							<string key="NSFrame">{{88, 78}, {432, 81}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
+							<reference key="NSNextKeyView" ref="893366949"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="763152143">
 								<int key="NSCellFlags">71433728</int>
@@ -247,6 +262,7 @@
 							<int key="NSvFlags">266</int>
 							<string key="NSFrame">{{85, 162}, {438, 14}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
+							<reference key="NSNextKeyView" ref="578035451"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="902706726">
 								<int key="NSCellFlags">68288064</int>
@@ -266,6 +282,7 @@
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{17, 48}, {144, 17}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
+							<reference key="NSNextKeyView" ref="429744192"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="820154423">
 								<int key="NSCellFlags">68288064</int>
@@ -282,6 +299,7 @@
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{92, 12}, {158, 18}}</string>
 							<reference key="NSSuperview" ref="734060865"/>
+							<reference key="NSNextKeyView" ref="341536898"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="1045977157">
 								<int key="NSCellFlags">67239424</int>
@@ -291,7 +309,7 @@
 								<reference key="NSControlView" ref="329908687"/>
 								<int key="NSButtonFlags">1211912703</int>
 								<int key="NSButtonFlags2">2</int>
-								<reference key="NSNormalImage" ref="940342193"/>
+								<reference key="NSNormalImage" ref="822263728"/>
 								<reference key="NSAlternateImage" ref="1063867142"/>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
@@ -300,9 +318,10 @@
 							</object>
 						</object>
 					</object>
-					<string key="NSFrameSize">{540, 179}</string>
+					<string key="NSFrame">{{7, 11}, {540, 179}}</string>
+					<reference key="NSNextKeyView" ref="1053959680"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMinSize">{540, 201}</string>
 				<string key="NSMaxSize">{900, 522}</string>
 			</object>
@@ -835,6 +854,7 @@
 							<reference ref="127701410"/>
 						</object>
 						<reference key="parent" ref="734060865"/>
+						<string key="objectName">Shortcut Handling Text Field - Passphrase Plain</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">816</int>
@@ -969,15 +989,12 @@
 					<string>811.IBPluginDependency</string>
 					<string>811.IBWindowTemplateEditedContentRect</string>
 					<string>811.ImportedFromIB2</string>
-					<string>811.windowTemplate.hasMaxSize</string>
-					<string>811.windowTemplate.hasMinSize</string>
-					<string>811.windowTemplate.maxSize</string>
-					<string>811.windowTemplate.minSize</string>
 					<string>812.IBPluginDependency</string>
 					<string>812.ImportedFromIB2</string>
 					<string>813.IBPluginDependency</string>
 					<string>813.IBViewBoundsToFrameTransform</string>
 					<string>813.ImportedFromIB2</string>
+					<string>814.CustomClassName</string>
 					<string>814.IBPluginDependency</string>
 					<string>814.IBViewBoundsToFrameTransform</string>
 					<string>814.ImportedFromIB2</string>
@@ -1013,10 +1030,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{626, 793}, {540, 179}}</string>
 					<boolean value="YES"/>
-					<boolean value="YES"/>
-					<boolean value="YES"/>
-					<string>{900, 500}</string>
-					<string>{540, 179}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1024,6 +1037,7 @@
 						<bytes key="NSTransformStruct">P4AAAL+AAABBiAAAweAAAA</bytes>
 					</object>
 					<boolean value="YES"/>
+					<string>ShortcutHandlingTextField</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABDKgAAwoQAAA</bytes>
@@ -1044,7 +1058,7 @@
 						<bytes key="NSTransformStruct">P4AAAL+AAABDm4AAwhAAAA</bytes>
 					</object>
 					<boolean value="YES"/>
-					<string>NSSecureTextField</string>
+					<string>ShortcutHandlingSecureTextField</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABDKgAAwoQAAA</bytes>
@@ -1072,17 +1086,13 @@
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<reference key="dict.sortedKeys" ref="0"/>
-				<object class="NSMutableArray" key="dict.values">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-				</object>
+				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="activeLocalization"/>
 			<object class="NSMutableDictionary" key="localizations">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<reference key="dict.sortedKeys" ref="0"/>
-				<object class="NSMutableArray" key="dict.values">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-				</object>
+				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
 			<int key="maxID">950</int>
@@ -1173,7 +1183,23 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">PinentryController.h</string>
+						<string key="minorKey">./Classes/PinentryController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ShortcutHandlingSecureTextField</string>
+					<string key="superclassName">NSSecureTextField</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ShortcutHandlingSecureTextField.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ShortcutHandlingTextField</string>
+					<string key="superclassName">NSTextField</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ShortcutHandlingTextField.h</string>
 					</object>
 				</object>
 			</object>
@@ -1189,7 +1215,6 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../pinentry-mac.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<bool key="EncodedWithXMLCoder">YES</bool>

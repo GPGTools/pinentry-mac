@@ -34,7 +34,7 @@ pinentry_cmd_handler_t pinentry_cmd_handler = mac_cmd_handler;
 
 
 int main(int argc, char *argv[]) {
-	pinentry_init ("pinentry-mac");
+	pinentry_init("pinentry-mac");
 	
 	/* Consumes all arguments.  */
 	if (pinentry_parse_opts(argc, argv)) {

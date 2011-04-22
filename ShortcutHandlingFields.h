@@ -1,5 +1,5 @@
 /*
- Copyright © Roman Zechmeister, 2010
+ Copyright © Moritz Ulrich, 2011
  
  Dieses Programm ist freie Software. Sie können es unter den Bedingungen 
  der GNU General Public License, wie von der Free Software Foundation 
@@ -17,22 +17,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface GPGDefaults : NSObject {
-	NSString *_domain;
-	NSMutableDictionary *_defaults;
-	NSLock *_defaultsLock;
-	NSSet *_defaultDictionarys;
+@interface ShortcutHandlingTextField: NSTextField {
 }
-
-@property (retain) NSString *domain;
-
-- (void)setObject:(id)value forKey:(NSString *)defaultName;
-- (id)objectForKey:(NSString *)defaultName;
-
-- (void)setBool:(BOOL)value forKey:(NSString *)defaultName;
-- (BOOL)boolForKey:(NSString *)defaultName;
-
-
 @end
 
+@interface ShortcutHandlingSecureTextField : NSSecureTextField {    
+}
+@end
