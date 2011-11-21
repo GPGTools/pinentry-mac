@@ -60,7 +60,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 	
 	if (pe->cache_id && pe->pin) {
 		
-		//if ([[GPGDefaults gpgDefaults] boolForKey:@"GPGUsesKeychain"]) {
+		//if ([[GPGDefaults gpgDefaults] boolForKey:@"UseKeychain"]) {
 			if (pe->error) {
 				storePassphraseInKeychain(pe->cache_id, nil);
 			} else {

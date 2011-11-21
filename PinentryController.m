@@ -53,8 +53,8 @@ PinentryController *_sharedInstance = nil;
 	okPressed = NO;
 	canUseKeychain = NO;
 	
-	showType = [[GPGDefaults gpgDefaults] boolForKey:@"GPGShowsPassphrase"];
-	saveInKeychain = [[GPGDefaults gpgDefaults] boolForKey:@"GPGUsesKeychain"];
+	showType = [[GPGDefaults gpgDefaults] boolForKey:@"ShowPassphrase"];
+	saveInKeychain = [[GPGDefaults gpgDefaults] boolForKey:@"UseKeychain"];
 
 	[NSApplication sharedApplication];
 	[NSBundle loadNibNamed:@"Pinentry" owner:self];
