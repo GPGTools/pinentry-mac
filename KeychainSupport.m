@@ -16,6 +16,7 @@
 */
 
 #import <Security/Security.h>
+#import "GPGDefaults.h"
 #import "KeychainSupport.h"
 
 #define GPG_SERVICE_NAME "GnuPG"
@@ -25,9 +26,17 @@ void storePassphraseInKeychain(const char *key, const char *passphrase) {
 	SecKeychainItemRef itemRef = NULL;
 	SecKeychainRef keychainRef = NULL;
 	
-	if (SecKeychainCopyDefault(&keychainRef) != 0) {
-		return;
-	}
+    NSString *keychainPath = [[GPGDefaults gpgDefaults] valueForKey:@"KeychainPath"];
+    const char* path = [keychainPath UTF8String];
+    
+    if(keychainPath && [keychainPath length]) {
+        if(SecKeychainOpen(path, &keychainRef) != 0) {
+            return;
+        }
+    }
+    else if(SecKeychainCopyDefault(&keychainRef) != 0) {
+        return;
+    }
 	
 	status = SecKeychainFindGenericPassword (keychainRef, strlen(GPG_SERVICE_NAME), GPG_SERVICE_NAME, 
 											 strlen(key), key, NULL, NULL, &itemRef);
@@ -54,9 +63,16 @@ char* getPassphraseFromKeychain(const char *key) {
 	void *passphraseData = NULL;
 	SecKeychainRef keychainRef = NULL;
 	
-	if (SecKeychainCopyDefault(&keychainRef) != 0) {
-		return NULL;
-	}
+    NSString *keychainPath = [[GPGDefaults gpgDefaults] valueForKey:@"KeychainPath"];
+    const char* path = [keychainPath UTF8String];
+    
+    if(keychainPath && [keychainPath length]) {
+        if(SecKeychainOpen(path, &keychainRef) != 0)
+            return NULL;
+    }
+    else if(SecKeychainCopyDefault(&keychainRef) != 0) {
+        return NULL;
+    }
 	
 	status = SecKeychainFindGenericPassword (keychainRef, strlen(GPG_SERVICE_NAME), GPG_SERVICE_NAME, 
 											 strlen(key), key, &passphraseLength, &passphraseData, NULL);
