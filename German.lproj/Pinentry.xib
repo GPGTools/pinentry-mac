@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">11A511</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<int key="IBDocument.SystemTarget">1070</int>
+		<string key="IBDocument.SystemVersion">11D50</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1864</string>
+		<string key="IBDocument.AppKitVersion">1138.32</string>
+		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1617</string>
+			<string key="NS.object.0">1864</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -29,11 +29,8 @@
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys" id="0">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-			</object>
-			<reference key="dict.values" ref="0"/>
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="1048">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -186,7 +183,7 @@
 								<reference key="NSControlView" ref="238022209"/>
 								<int key="NSButtonFlags">1211912703</int>
 								<int key="NSButtonFlags2">2</int>
-								<object class="NSCustomResource" key="NSNormalImage" id="1004616349">
+								<object class="NSCustomResource" key="NSNormalImage" id="160079343">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">NSSwitch</string>
 								</object>
@@ -315,7 +312,7 @@
 								<reference key="NSControlView" ref="329908687"/>
 								<int key="NSButtonFlags">1211912703</int>
 								<int key="NSButtonFlags2">2</int>
-								<reference key="NSNormalImage" ref="1004616349"/>
+								<reference key="NSNormalImage" ref="160079343"/>
 								<reference key="NSAlternateImage" ref="1063867142"/>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
@@ -327,7 +324,7 @@
 					<string key="NSFrameSize">{540, 179}</string>
 					<reference key="NSNextKeyView" ref="1053959680"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMinSize">{540, 201}</string>
 				<string key="NSMaxSize">{900, 522}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -588,38 +585,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">nextKeyView</string>
-						<reference key="source" ref="341536898"/>
-						<reference key="destination" ref="429744192"/>
-					</object>
-					<int key="connectionID">831</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">nextKeyView</string>
-						<reference key="source" ref="429744192"/>
-						<reference key="destination" ref="14498297"/>
-					</object>
-					<int key="connectionID">832</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">nextKeyView</string>
-						<reference key="source" ref="14498297"/>
-						<reference key="destination" ref="341536898"/>
-					</object>
-					<int key="connectionID">833</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">nextKeyView</string>
-						<reference key="source" ref="238022209"/>
-						<reference key="destination" ref="429744192"/>
-					</object>
-					<int key="connectionID">835</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="630869344"/>
 						<reference key="destination" ref="1021"/>
@@ -809,14 +774,6 @@
 						<reference key="destination" ref="341536898"/>
 					</object>
 					<int key="connectionID">909</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">nextKeyView</string>
-						<reference key="source" ref="329908687"/>
-						<reference key="destination" ref="429744192"/>
-					</object>
-					<int key="connectionID">934</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1020,13 +977,55 @@
 					</object>
 					<int key="connectionID">950</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextKeyView</string>
+						<reference key="source" ref="429744192"/>
+						<reference key="destination" ref="238022209"/>
+					</object>
+					<int key="connectionID">1102</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextKeyView</string>
+						<reference key="source" ref="238022209"/>
+						<reference key="destination" ref="329908687"/>
+					</object>
+					<int key="connectionID">1103</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextKeyView</string>
+						<reference key="source" ref="341536898"/>
+						<reference key="destination" ref="386080157"/>
+					</object>
+					<int key="connectionID">1105</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextKeyView</string>
+						<reference key="source" ref="329908687"/>
+						<reference key="destination" ref="14498297"/>
+					</object>
+					<int key="connectionID">1106</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextKeyView</string>
+						<reference key="source" ref="14498297"/>
+						<reference key="destination" ref="429744192"/>
+					</object>
+					<int key="connectionID">1107</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBObjectRecord">
 						<int key="objectID">0</int>
-						<reference key="object" ref="0"/>
+						<object class="NSArray" key="object" id="0">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
 						<reference key="children" ref="1048"/>
 						<nil key="parent"/>
 					</object>
@@ -1524,7 +1523,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1096</int>
+			<int key="maxID">1107</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1635,10 +1634,6 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<integer value="1050" key="NS.object.0"/>
-		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
 			<integer value="3000" key="NS.object.0"/>
@@ -1656,8 +1651,8 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{9, 8}</string>
-				<string>{7, 2}</string>
+				<string>{11, 11}</string>
+				<string>{10, 3}</string>
 				<string>{15, 15}</string>
 				<string>{512, 512}</string>
 			</object>
