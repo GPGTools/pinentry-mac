@@ -24,3 +24,4 @@ clean:
 
 test: compile
 	@echo "nothing to test"
+
