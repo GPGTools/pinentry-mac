@@ -70,13 +70,13 @@ char* getPassphraseFromKeychain(const char *key) {
         if(SecKeychainOpen(path, &keychainRef) != 0)
             return NULL;
     }
-    else if(SecKeychainCopyDefault(&keychainRef) != 0) {
+    /*else if(SecKeychainCopyDefault(&keychainRef) != 0) {
         return NULL;
-    }
+    }*/
 	
 	status = SecKeychainFindGenericPassword (keychainRef, strlen(GPG_SERVICE_NAME), GPG_SERVICE_NAME, 
 											 strlen(key), key, &passphraseLength, &passphraseData, NULL);
-	CFRelease(keychainRef);
+	if (keychainRef) CFRelease(keychainRef);
 	
 	if (status != 0) {
 		return NULL;
