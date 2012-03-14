@@ -28,6 +28,9 @@
 #include "PinentryController.h"
 #import "GPGDefaults.h"
 #import "KeychainSupport.h"
+#ifdef FALLBACK_CURSES
+#include <pinentry-curses.h>
+#endif
 
 static int mac_cmd_handler (pinentry_t pe);
 pinentry_cmd_handler_t pinentry_cmd_handler = mac_cmd_handler;
@@ -35,7 +38,12 @@ pinentry_cmd_handler_t pinentry_cmd_handler = mac_cmd_handler;
 
 int main(int argc, char *argv[]) {
 	pinentry_init("pinentry-mac");
-	
+
+#ifdef FALLBACK_CURSES
+    if (!pinentry_have_display (argc, argv))
+        pinentry_cmd_handler = curses_cmd_handler;
+#endif
+    
 	/* Consumes all arguments.  */
 	if (pinentry_parse_opts(argc, argv)) {
 		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];

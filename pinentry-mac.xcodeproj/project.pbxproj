@@ -25,6 +25,7 @@
 		438EE3130A1C6E860005741F /* secmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 438EE3100A1C6E860005741F /* secmem.c */; };
 		438EE3140A1C6E860005741F /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 438EE3110A1C6E860005741F /* util.c */; };
 		438EE31B0A1C70B80005741F /* PinentryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438EE31A0A1C70B80005741F /* PinentryController.m */; };
+		45A0BB29150FC624005C15B2 /* pinentry-curses.c in Sources */ = {isa = PBXBuildFile; fileRef = 45A0BB27150FC624005C15B2 /* pinentry-curses.c */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,8 @@
 		438EE3150A1C6EB30005741F /* config.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = config.h; path = "pinentry-current/config.h"; sourceTree = "<group>"; };
 		438EE3190A1C70B80005741F /* PinentryController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PinentryController.h; sourceTree = "<group>"; };
 		438EE31A0A1C70B80005741F /* PinentryController.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = PinentryController.m; sourceTree = "<group>"; };
+		45A0BB27150FC624005C15B2 /* pinentry-curses.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "pinentry-curses.c"; path = "pinentry-current/pinentry/pinentry-curses.c"; sourceTree = "<group>"; };
+		45A0BB28150FC624005C15B2 /* pinentry-curses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "pinentry-curses.h"; path = "pinentry-current/pinentry/pinentry-curses.h"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* pinentry-mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pinentry-mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -164,6 +167,8 @@
 				438EE30E0A1C6E860005741F /* memory.h */,
 				438EE30B0A1C6E700005741F /* pinentry.c */,
 				438EE30C0A1C6E700005741F /* pinentry.h */,
+				45A0BB27150FC624005C15B2 /* pinentry-curses.c */,
+				45A0BB28150FC624005C15B2 /* pinentry-curses.h */,
 				438EE3100A1C6E860005741F /* secmem.c */,
 				438EE30F0A1C6E860005741F /* secmem-util.h */,
 				438EE3110A1C6E860005741F /* util.c */,
@@ -268,6 +273,7 @@
 				305E262A1296948200CF5467 /* GPGDefaults.m in Sources */,
 				305E2C4D129734A100CF5467 /* KeychainSupport.m in Sources */,
 				3025AFF21361D9830038F6BA /* ShortcutHandlingFields.m in Sources */,
+				45A0BB29150FC624005C15B2 /* pinentry-curses.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,11 +311,17 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = HAVE_CONFIG_H;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					HAVE_CONFIG_H,
+					FALLBACK_CURSES,
+				);
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				OTHER_LDFLAGS = "-liconv";
+				OTHER_LDFLAGS = (
+					"-liconv",
+					"-lcurses",
+				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
 				VALID_ARCHS = "i386 x86_64 ppc";
@@ -369,11 +381,17 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = HAVE_CONFIG_H;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					HAVE_CONFIG_H,
+					FALLBACK_CURSES,
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-liconv";
+				OTHER_LDFLAGS = (
+					"-liconv",
+					"-lcurses",
+				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
 				VALID_ARCHS = "i386 x86_64 ppc";
@@ -389,10 +407,16 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = HAVE_CONFIG_H;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					HAVE_CONFIG_H,
+					FALLBACK_CURSES,
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				OTHER_LDFLAGS = "-liconv";
+				OTHER_LDFLAGS = (
+					"-liconv",
+					"-lcurses",
+				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
 				VALID_ARCHS = "i386 x86_64 ppc";
