@@ -35,12 +35,15 @@
 static int mac_cmd_handler (pinentry_t pe);
 pinentry_cmd_handler_t pinentry_cmd_handler = mac_cmd_handler;
 
+#ifdef FALLBACK_CURSES
+int pinentry_mac_is_curses_demanded();
+#endif
 
 int main(int argc, char *argv[]) {
 	pinentry_init("pinentry-mac");
 
 #ifdef FALLBACK_CURSES
-    if (!pinentry_have_display (argc, argv))
+    if (pinentry_mac_is_curses_demanded())
         pinentry_cmd_handler = curses_cmd_handler;
 #endif
     
@@ -156,4 +159,38 @@ static int mac_cmd_handler (pinentry_t pe) {
 	return -1; // Shouldn't get this far.
 }
 
+#ifdef FALLBACK_CURSES
+/* On Mac, the DISPLAY environment variable, which is passed from 
+   a session to gpg2 to gpg-agent to pinentry and which is used
+   on other platforms for falling back to curses, is not completely
+   reliable, since some Mac users do not use X11. 
 
+   It might be valuable to submit patches so that gpg-agent could
+   automatically indicate the state of SSH_CONNECTION to pinentry,
+   which would be useful for OS X.
+ 
+   This pinentry-mac handling will recognize USE_CURSES=1 in
+   the environment variable PINENTRY_USER_DATA (which is 
+   automatically passed from session to gpg2 to gpg-agent to
+   pinentry) to allow the user to specify that curses should be 
+   initialized. 
+
+   E.g. in .bashrc or .profile:
+
+   if test "$SSH_CONNECTION" != ""
+   then
+     export PINENTRY_USER_DATA="USE_CURSES=1"
+   fi
+ */
+int
+pinentry_mac_is_curses_demanded()
+{
+    const char *s;
+    
+    s = getenv ("PINENTRY_USER_DATA");
+    if (s && *s) {
+        return (strstr(s, "USE_CURSES=1") != NULL);
+    }
+    return 0;
+}
+#endif
