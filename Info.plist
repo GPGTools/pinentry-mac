@@ -28,5 +28,7 @@
 	<string>NSApplication</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.8.1${VERSION_ADDITION}</string>
+	<key>NSMainNibFile</key>
+	<string>Main</string>
 </dict>
 </plist>
