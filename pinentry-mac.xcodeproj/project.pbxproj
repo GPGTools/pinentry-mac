@@ -347,7 +347,9 @@
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/MacGPG2/libexec;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "pinentry-mac";
+				SDKROOT = macosx10.7;
 				VERSION_ADDITION = " (with ppc)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -363,7 +365,9 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/MacGPG2/libexec;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "pinentry-mac";
+				SDKROOT = macosx10.7;
 				VERSION_ADDITION = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -377,7 +381,9 @@
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/MacGPG2/libexec;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "pinentry-mac";
+				SDKROOT = macosx10.7;
 				VERSION_ADDITION = "";
 				WRAPPER_EXTENSION = app;
 			};
