@@ -27,7 +27,8 @@ int pinentry_mac_is_curses_demanded();
 
 
 
-- (void)awakeFromNib {
+
+- (void)applicationDidFinishLaunching:(NSNotification *)notification {
 	pinentry_init("pinentry-mac");
 	
 #ifdef FALLBACK_CURSES
@@ -47,16 +48,15 @@ int pinentry_mac_is_curses_demanded();
 		exit(0);
     }
 	
-	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+	//dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
 	
-	dispatch_async(queue, ^{
-		if (pinentry_loop()) {
-			exit(1);
-		}
-		exit(0);
-	});	
+	//dispatch_async(queue, ^{
+	if (pinentry_loop()) {
+		exit(1);
+	}
+	exit(0);
+	//});
 }
-
 
 
 

@@ -24,16 +24,7 @@
 
 
 @implementation PinentryController : NSWindowController
-@synthesize descriptionText;
-@synthesize promptText;
-@synthesize errorText;
-@synthesize passphrase;
-@synthesize grab;
-@synthesize confirmMode;
-@synthesize oneButton;
-@synthesize saveInKeychain;
-@synthesize canUseKeychain;
-@synthesize showType;
+@synthesize descriptionText, promptText, errorText, passphrase, grab, confirmMode, oneButton, saveInKeychain, canUseKeychain, showType;
 
 PinentryController *_sharedInstance = nil;
 
@@ -56,7 +47,6 @@ PinentryController *_sharedInstance = nil;
 	showType = [[GPGDefaults gpgDefaults] boolForKey:@"ShowPassphrase"];
 	saveInKeychain = [[GPGDefaults gpgDefaults] boolForKey:@"UseKeychain"];
 
-	[NSApplication sharedApplication];
 	[NSBundle loadNibNamed:@"Pinentry" owner:self];
 	
 	
@@ -65,13 +55,10 @@ PinentryController *_sharedInstance = nil;
 - (NSInteger)runModal {
 	[window center];
 	 
-	if (grab) {
-		[NSApp activateIgnoringOtherApps:YES];
-		[window makeKeyAndOrderFront:self];
-	} else {
-		[NSApp requestUserAttention: NSCriticalRequest];
-
-	}
+	[NSApp activateIgnoringOtherApps:YES];
+	[window makeKeyAndOrderFront:self];
+	
+	[window makeFirstResponder:securePassphraseField];
 	
 	[NSApp runModalForWindow:window];
 	return okPressed;

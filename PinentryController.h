@@ -38,20 +38,14 @@
 	BOOL saveInKeychain;
 	BOOL canUseKeychain;
 	BOOL showType;
+	
+	IBOutlet NSTextField *passphraseField;
+	IBOutlet NSTextField *securePassphraseField;	
 }
 @property (assign) NSWindow *window;
-@property (retain) NSString *descriptionText;
-@property (retain) NSString *promptText;
-@property (retain) NSString *errorText;
-@property (retain) NSString *passphrase;
-@property (retain) NSString *okButtonText;
-@property (retain) NSString *cancelButtonText;
-@property BOOL grab;
-@property BOOL confirmMode;
-@property BOOL oneButton;
-@property BOOL saveInKeychain;
-@property BOOL canUseKeychain;
-@property BOOL showType;
+
+@property (retain) NSString *descriptionText, *promptText, *errorText, *passphrase, *okButtonText, *cancelButtonText;
+@property BOOL grab, confirmMode, oneButton, saveInKeychain, canUseKeychain, showType;
 
 
 - (NSInteger)runModal;
