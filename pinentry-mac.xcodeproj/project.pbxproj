@@ -328,7 +328,7 @@
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-liconv",
 					"-lcurses",
@@ -347,6 +347,7 @@
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/MacGPG2/libexec;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "pinentry-mac";
 				VERSION_ADDITION = " (with ppc)";
 				WRAPPER_EXTENSION = app;
@@ -363,6 +364,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/MacGPG2/libexec;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "pinentry-mac";
 				VERSION_ADDITION = "";
 				WRAPPER_EXTENSION = app;
@@ -377,6 +379,7 @@
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/MacGPG2/libexec;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "pinentry-mac";
 				VERSION_ADDITION = "";
 				WRAPPER_EXTENSION = app;
@@ -398,7 +401,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-liconv",
@@ -425,7 +428,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-liconv",
 					"-lcurses",
