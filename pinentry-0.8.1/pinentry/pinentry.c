@@ -146,7 +146,7 @@ pinentry_utf8_to_local (char *lc_ctype, char *text)
       free (output_buf);
       return NULL;
     }
-  processed = iconv (cd, &input, &input_len, &output, &output_len);
+  processed = iconv (cd, (char **)&input, &input_len, &output, &output_len);
   iconv_close (cd);
   if (processed == (size_t) -1 || input_len)
     {
@@ -212,7 +212,7 @@ pinentry_local_to_utf8 (char *lc_ctype, char *text, int secure)
         free (output_buf);
       return NULL;
     }
-  processed = iconv (cd, &input, &input_len, &output, &output_len);
+  processed = iconv (cd, (char **)&input, &input_len, &output, &output_len);
   iconv_close (cd);
   if (processed == (size_t) -1 || input_len)
     {

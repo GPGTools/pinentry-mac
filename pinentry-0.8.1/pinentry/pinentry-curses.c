@@ -646,7 +646,7 @@ dialog_run (pinentry_t pinentry, const char *tty_name, const char *tty_type)
 	  errno = err;
 	  return -1;
 	}
-      screen = newterm (tty_type, ttyfo, ttyfi);
+      screen = newterm ((char *)tty_type, ttyfo, ttyfi);
       set_term (screen);
     }
   else
