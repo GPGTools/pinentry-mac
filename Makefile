@@ -1,28 +1,20 @@
 PROJECT = pinentry-mac
 TARGET = pinentry-mac
+PRODUCT = pinentry-mac.app
 CONFIG = Release
+MAKE_DEFAULT = Dependencies/GPGTools_Core/newBuildSystem/Makefile.default
 
-include Dependencies/GPGTools_Core/make/default
+-include $(MAKE_DEFAULT)
 
-all: compile
+.PRECIOUS: $(MAKE_DEFAULT)
+$(MAKE_DEFAULT):
+	@bash -c "$$(curl -fsSL https://raw.github.com/GPGTools/GPGTools_Core/master/newBuildSystem/prepare-core.sh)"
 
-update-core:
-	@cd Dependencies/GPGTools_Core; git pull origin master; cd -
-update-me:
-	@git pull origin master
+init: $(MAKE_DEFAULT)
 
-update: update-me update-core
-
-compile:
-	@xcodebuild -project $(PROJECT).xcodeproj -target $(TARGET) -configuration $(CONFIG) build
+$(PRODUCT): *.m pinentry-mac.xcodeproj
+	@xcodebuild -project $(PROJECT).xcodeproj -target $(TARGET) -configuration $(CONFIG) build $(XCCONFIG)
 
 compile_with_ppc:
-	@xcodebuild -project $(PROJECT).xcodeproj -target $(TARGET) -configuration "$(CONFIG) with ppc" build
+	@xcodebuild -project $(PROJECT).xcodeproj -target $(TARGET) -configuration "$(CONFIG) with ppc" build $(XCCONFIG)
 
-clean:
-	@xcodebuild -project $(PROJECT).xcodeproj -target $(TARGET) -configuration $(CONFIG) clean > /dev/null
-
-test: compile
-	@echo "nothing to test"
-
-init:
