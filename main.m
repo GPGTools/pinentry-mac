@@ -7,7 +7,9 @@
  Modified by Marcus Brinkmann <marcus@g10code.de>.
  Adapted / rewritten by Benjamin Donnachie <benjamin@py-soft.co.uk> for MacOS X.
  Modified by Roman Zechmeister <Roman.Zechmeister@aon.at>
-   
+ 
+ Code Signature verification added by Lukas Pitschl <lukele@leftandleaving.com>
+ 
  Dieses Programm ist freie Software. Sie können es unter den Bedingungen 
  der GNU General Public License, wie von der Free Software Foundation 
  veröffentlicht, weitergeben und/oder modifizieren, entweder gemäß 
@@ -25,7 +27,14 @@
 
 
 #import <Cocoa/Cocoa.h>
+#import "NSBundle+Sandbox.h"
 
 int main(int argc, char *argv[]) {
-    return NSApplicationMain(argc,  (const char **) argv);
+    /* Perform signature validation, to check if the app bundle has been tampered with. */
+	if([[NSBundle mainBundle] ob_codeSignState] != OBCodeSignStateSignatureValid) {
+        NSRunAlertPanel(@"Someone tampered with your installation of pinentry-mac!", @"To keep you safe, pinentry-mac will exit now!\n\nPlease download and install the latest version of GPG Suite from https://gpgtools.org to be sure you have an original version from us!", @"", nil, nil, nil);
+        exit(1);
+    }
+	
+	return NSApplicationMain(argc,  (const char **) argv);
 }
