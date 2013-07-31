@@ -27,14 +27,32 @@
 
 
 #import <Cocoa/Cocoa.h>
-#import "NSBundle+Sandbox.h"
+
+BOOL isBundleValidSigned(NSBundle *bundle) {
+	SecRequirementRef requirement = nil;
+    SecStaticCodeRef staticCode = nil;
+	
+    SecStaticCodeCreateWithPath((__bridge CFURLRef)[bundle bundleURL], 0, &staticCode);
+	SecRequirementCreateWithString(CFSTR("anchor apple generic and cert leaf = H\"233B4E43187B51BF7D6711053DD652DDF54B43BE\""), 0, &requirement);
+	
+	OSStatus result = SecStaticCodeCheckValidity(staticCode, 0, requirement);
+    
+    if (staticCode) CFRelease(staticCode);
+    if (requirement) CFRelease(requirement);
+    return result == noErr;
+}
+
+
 
 int main(int argc, char *argv[]) {
-    /* Perform signature validation, to check if the app bundle has been tampered with. */
-	if([[NSBundle mainBundle] ob_codeSignState] != OBCodeSignStateSignatureValid) {
-        NSRunAlertPanel(@"Someone tampered with your installation of pinentry-mac!", @"To keep you safe, pinentry-mac will exit now!\n\nPlease download and install the latest version of GPG Suite from https://gpgtools.org to be sure you have an original version from us!", @"", nil, nil, nil);
-        exit(1);
+#ifdef CODE_SIGN_CHECK
+	/* Check the validity of the code signature. */
+    if (!isBundleValidSigned([NSBundle mainBundle])) {
+		NSRunAlertPanel(@"Someone tampered with your installation of pinentry-mac!", @"To keep you safe, pinentry-mac will exit now!\n\nPlease download and install the latest version of GPG Suite from https://gpgtools.org to be sure you have an original version from us!", nil, nil, nil);
+        return 1;
     }
+#endif
 	
 	return NSApplicationMain(argc,  (const char **) argv);
 }
+
