@@ -9,10 +9,8 @@
 #endif
 
 
-
 extern int *_NSGetArgc(void);
 extern char ***_NSGetArgv(void);
-
 
 
 
@@ -60,11 +58,37 @@ int pinentry_mac_is_curses_demanded();
 
 
 
+NSString *stringBetweenStrings(NSString *haystack, NSString *start, NSString *end, BOOL endNeeded) {
+	NSRange range = [haystack rangeOfString:start];
+	NSUInteger location;
+	
+	if (range.location == NSNotFound) {
+		return nil;
+	}
+	
+	location = range.location + range.length;
+	range = [haystack rangeOfString:end options:NSCaseInsensitiveSearch range:NSMakeRange(location, haystack.length - location)];
+	
+	if (range.location != NSNotFound) {
+		range.length = range.location - location;
+	} else {
+		if (endNeeded) {
+			return nil;
+		}
+		range.length = haystack.length - location;
+	}
+	range.location = location;
+		
+	return [haystack substringWithRange:range];
+}
+
+
 static int mac_cmd_handler (pinentry_t pe) {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
+	
+	// cache_id is used to save the passphrase in the Mac OS X keychain.
 	if (pe->cache_id && pe->pin) {
-		
 		if (pe->error) {
 			storePassphraseInKeychain(pe->cache_id, nil);
 		} else {
@@ -86,6 +110,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 	}
 	
 	
+	
 	PinentryController *pinentry = [[[PinentryController alloc] init] autorelease];
 	
 	pinentry.grab = pe->grab;
@@ -94,6 +119,85 @@ static int mac_cmd_handler (pinentry_t pe) {
 	if (pe->description) {
 		description = [[NSString stringWithUTF8String:pe->description] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
 	}
+	
+	
+	
+	
+	/*
+	 PINENTRY_USER_DATA should be comma-seperated.
+	*/
+	NSString *userData = nil;
+	const char *cUserData = getenv("PINENTRY_USER_DATA");
+	if (cUserData) {
+		userData = [NSString stringWithUTF8String:cUserData];
+	}
+	
+	
+	if (userData) {
+		/*
+		 DESCRIPTION is percent escaped and additionally can use the following placeholders:
+		 %FINGERPRINT, %KEYID, %USERID, %EMAIL, %COMMENT, %NAME
+		*/
+		NSMutableString *descriptionTemplate = [stringBetweenStrings(userData, @"DESCRIPTION=", @",", NO) mutableCopy];
+				
+		if (descriptionTemplate) {						
+			if (pe->cache_id) { // Get KeyID from cache_id.
+				NSString *fingerprint = [NSString stringWithUTF8String:pe->cache_id];
+				if (fingerprint) {
+					[descriptionTemplate replaceOccurrencesOfString:@"%FINGERPRINT" withString:fingerprint options:0 range:NSMakeRange(0, descriptionTemplate.length)];
+					[descriptionTemplate replaceOccurrencesOfString:@"%KEYID" withString:[fingerprint substringFromIndex:fingerprint.length - 8] options:0 range:NSMakeRange(0, descriptionTemplate.length)];
+				}
+			}
+			
+			if (description) { //Parse original description if any, to get UserID.
+				NSArray *lines = [description componentsSeparatedByString:@"\n"];
+				if (lines.count > 2) {
+					NSString *line = [lines objectAtIndex:1];
+					
+					
+					NSString *userID = stringBetweenStrings(line, @"\"", @"\"", YES);
+					
+					if (userID) {
+						[descriptionTemplate replaceOccurrencesOfString:@"%USERID" withString:userID options:0 range:NSMakeRange(0, descriptionTemplate.length)];
+						
+						NSUInteger textLength = [userID length];
+						NSRange range;
+						
+						// Find e-mail.
+						if ([userID hasSuffix:@">"] && (range = [userID rangeOfString:@" <" options:NSBackwardsSearch]).length > 0) {
+							range.location += 2;
+							range.length = textLength - range.location - 1;
+							
+							NSString *email = [userID substringWithRange:range];
+							[descriptionTemplate replaceOccurrencesOfString:@"%EMAIL" withString:email options:0 range:NSMakeRange(0, descriptionTemplate.length)];
+							
+							userID = [userID substringToIndex:range.location - 2];
+							textLength -= (range.length + 3);
+						}
+						
+						// Find comment.
+						range = [userID rangeOfString:@" (" options:NSBackwardsSearch];
+						if (range.length > 0 && range.location > 0 && [userID hasSuffix:@")"]) {
+							range.location += 2;
+							range.length = textLength - range.location - 1;
+							
+							NSString *comment = [userID substringWithRange:range];
+							[descriptionTemplate replaceOccurrencesOfString:@"%COMMENT" withString:comment options:0 range:NSMakeRange(0, descriptionTemplate.length)];
+							
+							userID = [userID substringToIndex:range.location - 2];
+						}
+						
+						// Now, userID only contains the name.
+						[descriptionTemplate replaceOccurrencesOfString:@"%NAME" withString:userID options:0 range:NSMakeRange(0, descriptionTemplate.length)];
+					}
+				}
+			}
+			
+			description = [descriptionTemplate stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			[descriptionTemplate release];
+		}
+	}
+	
 	
 	if (pe->pin) { // want_pass.
 		if (pe->prompt)
