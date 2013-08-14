@@ -57,32 +57,6 @@ int pinentry_mac_is_curses_demanded();
 }
 
 
-
-NSString *stringBetweenStrings(NSString *haystack, NSString *start, NSString *end, BOOL endNeeded) {
-	NSRange range = [haystack rangeOfString:start];
-	NSUInteger location;
-	
-	if (range.location == NSNotFound) {
-		return nil;
-	}
-	
-	location = range.location + range.length;
-	range = [haystack rangeOfString:end options:NSCaseInsensitiveSearch range:NSMakeRange(location, haystack.length - location)];
-	
-	if (range.location != NSNotFound) {
-		range.length = range.location - location;
-	} else {
-		if (endNeeded) {
-			return nil;
-		}
-		range.length = haystack.length - location;
-	}
-	range.location = location;
-		
-	return [haystack substringWithRange:range];
-}
-
-
 static int mac_cmd_handler (pinentry_t pe) {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
@@ -138,7 +112,8 @@ static int mac_cmd_handler (pinentry_t pe) {
 		 DESCRIPTION is percent escaped and additionally can use the following placeholders:
 		 %FINGERPRINT, %KEYID, %USERID, %EMAIL, %COMMENT, %NAME
 		*/
-		NSMutableString *descriptionTemplate = [stringBetweenStrings(userData, @"DESCRIPTION=", @",", NO) mutableCopy];
+		
+		NSMutableString *descriptionTemplate = [[userData stringBetweenString:@"DESCRIPTION=" andString:@"," needEnd:NO] mutableCopy];
 				
 		if (descriptionTemplate) {						
 			if (pe->cache_id) { // Get KeyID from cache_id.
@@ -155,7 +130,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 					NSString *line = [lines objectAtIndex:1];
 					
 					
-					NSString *userID = stringBetweenStrings(line, @"\"", @"\"", YES);
+					NSString *userID = [line stringBetweenString:@"\"" andString:@"\"" needEnd:YES];
 					
 					if (userID) {
 						[descriptionTemplate replaceOccurrencesOfString:@"%USERID" withString:userID options:0 range:NSMakeRange(0, descriptionTemplate.length)];
@@ -195,6 +170,13 @@ static int mac_cmd_handler (pinentry_t pe) {
 			
 			description = [descriptionTemplate stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			[descriptionTemplate release];
+		}
+		
+		NSString *iconPath = [userData stringBetweenString:@"ICON=" andString:@"," needEnd:NO];
+		
+		if (iconPath.length > 0) {
+			NSImage *icon = [[NSImage alloc] initWithContentsOfFile:iconPath];
+			pinentry.icon = icon;
 		}
 	}
 	
@@ -292,3 +274,38 @@ int pinentry_mac_is_curses_demanded() {
 
 
 @end
+
+
+
+@implementation NSString (BetweenExtension)
+
+- (NSString *)stringBetweenString:(NSString *)start andString:(NSString *)end needEnd:(BOOL)endNeeded {
+	NSRange range = [self rangeOfString:start];
+	NSUInteger location;
+	
+	if (range.location == NSNotFound) {
+		return nil;
+	}
+	
+	location = range.location + range.length;
+	range = [self rangeOfString:end options:NSCaseInsensitiveSearch range:NSMakeRange(location, self.length - location)];
+	
+	if (range.location != NSNotFound) {
+		range.length = range.location - location;
+	} else {
+		if (endNeeded) {
+			return nil;
+		}
+		range.length = self.length - location;
+	}
+	range.location = location;
+	
+	return [self substringWithRange:range];
+}
+
+@end
+
+
+
+
+

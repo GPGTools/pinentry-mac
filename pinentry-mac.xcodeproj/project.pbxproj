@@ -15,7 +15,6 @@
 		305E2C4D129734A100CF5467 /* KeychainSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 305E2C4C129734A100CF5467 /* KeychainSupport.m */; };
 		305E2D09129734E300CF5467 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 305E2D08129734E300CF5467 /* Security.framework */; };
 		30FC94811297E81A0039CEF8 /* Pinentry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30FC94801297E81A0039CEF8 /* Pinentry.xib */; };
-		432325EC0A2B8CD9003EDF4B /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 432325EB0A2B8CD9003EDF4B /* logo.png */; };
 		4354B56E0A29D531003EB704 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 4354B56D0A29D531003EB704 /* COPYING */; };
 		438EE3050A1C6E570005741F /* assuan-buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 438EE2FD0A1C6E560005741F /* assuan-buffer.c */; };
 		438EE3060A1C6E570005741F /* assuan-errors.c in Sources */ = {isa = PBXBuildFile; fileRef = 438EE2FF0A1C6E560005741F /* assuan-errors.c */; };
@@ -52,7 +51,6 @@
 		30FC956D129819390039CEF8 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Pinentry.xib.strings; sourceTree = "<group>"; };
 		30FC957412981A040039CEF8 /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/Pinentry.xib; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
-		432325EB0A2B8CD9003EDF4B /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		4354B56D0A29D531003EB704 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		438EE2FD0A1C6E560005741F /* assuan-buffer.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = "assuan-buffer.c"; path = "pinentry-current/assuan/assuan-buffer.c"; sourceTree = "<group>"; };
 		438EE2FE0A1C6E560005741F /* assuan-defs.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "assuan-defs.h"; path = "pinentry-current/assuan/assuan-defs.h"; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 				30FC94801297E81A0039CEF8 /* Pinentry.xib */,
 				30FC956A129819310039CEF8 /* Pinentry.xib.strings */,
 				1FA4293A0E716E0C0007F59B /* Icon.icns */,
-				432325EB0A2B8CD9003EDF4B /* logo.png */,
 				1FA4293D0E716E1A0007F59B /* Info.plist */,
 				4354B56D0A29D531003EB704 /* COPYING */,
 			);
@@ -239,7 +236,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4354B56E0A29D531003EB704 /* COPYING in Resources */,
-				432325EC0A2B8CD9003EDF4B /* logo.png in Resources */,
 				1FA4293B0E716E0C0007F59B /* Icon.icns in Resources */,
 				30FC94811297E81A0039CEF8 /* Pinentry.xib in Resources */,
 				3006584E15848F9D0033E1D3 /* Main.xib in Resources */,

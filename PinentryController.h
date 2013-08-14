@@ -30,6 +30,8 @@
 	
 	NSString *okButtonText;
 	NSString *cancelButtonText;
+	
+	NSImage *_icon;
 
 	BOOL grab;
 	BOOL confirmMode;
@@ -46,6 +48,7 @@
 
 @property (nonatomic, retain) NSString *descriptionText, *promptText, *errorText, *passphrase, *okButtonText, *cancelButtonText;
 @property (nonatomic) BOOL grab, confirmMode, oneButton, saveInKeychain, canUseKeychain, showType;
+@property (nonatomic, retain) NSImage *icon;
 
 
 - (NSInteger)runModal;

@@ -24,7 +24,7 @@
 
 
 @implementation PinentryController : NSWindowController
-@synthesize descriptionText, promptText, errorText, passphrase, grab, confirmMode, oneButton, saveInKeychain, canUseKeychain, showType;
+@synthesize descriptionText, promptText, errorText, passphrase, grab, confirmMode, oneButton, saveInKeychain, canUseKeychain, showType, icon=_icon;
 
 PinentryController *_sharedInstance = nil;
 
@@ -60,6 +60,14 @@ PinentryController *_sharedInstance = nil;
 	[window close];
 }
 
+
+
+- (NSImage *)icon {
+	if (!_icon) {
+		_icon = [[[NSBundle mainBundle] imageForResource:@"Icon"] retain];
+	}
+	return [[_icon retain] autorelease];
+}
 
 
 // Button properties
