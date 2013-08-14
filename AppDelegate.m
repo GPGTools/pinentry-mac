@@ -60,14 +60,19 @@ int pinentry_mac_is_curses_demanded();
 static int mac_cmd_handler (pinentry_t pe) {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
+	NSString *keychainLabel = nil;
+	NSString *cacheId = nil;
+	if (pe->cache_id) {
+		cacheId = [NSString stringWithUTF8String:pe->cache_id];
+	}
 	
 	// cache_id is used to save the passphrase in the Mac OS X keychain.
-	if (pe->cache_id && pe->pin) {
+	if (cacheId && pe->pin) {
 		if (pe->error) {
-			storePassphraseInKeychain(pe->cache_id, nil);
+			storePassphraseInKeychain(cacheId, nil, nil);
 		} else {
-			char *passphrase;
-			passphrase = getPassphraseFromKeychain(pe->cache_id);
+			const char *passphrase;
+			passphrase = [getPassphraseFromKeychain(cacheId) UTF8String];
 			if (passphrase) {
 				int len = strlen(passphrase);
 				pinentry_setbufferlen(pe, len + 1);
@@ -115,12 +120,14 @@ static int mac_cmd_handler (pinentry_t pe) {
 		
 		NSMutableString *descriptionTemplate = [[userData stringBetweenString:@"DESCRIPTION=" andString:@"," needEnd:NO] mutableCopy];
 				
-		if (descriptionTemplate) {						
+		if (descriptionTemplate) {
+			NSString *keyID = nil;
 			if (pe->cache_id) { // Get KeyID from cache_id.
 				NSString *fingerprint = [NSString stringWithUTF8String:pe->cache_id];
 				if (fingerprint) {
 					[descriptionTemplate replaceOccurrencesOfString:@"%FINGERPRINT" withString:fingerprint options:0 range:NSMakeRange(0, descriptionTemplate.length)];
-					[descriptionTemplate replaceOccurrencesOfString:@"%KEYID" withString:[fingerprint substringFromIndex:fingerprint.length - 8] options:0 range:NSMakeRange(0, descriptionTemplate.length)];
+					keyID = [fingerprint substringFromIndex:fingerprint.length - 8];
+					[descriptionTemplate replaceOccurrencesOfString:@"%KEYID" withString:keyID options:0 range:NSMakeRange(0, descriptionTemplate.length)];
 				}
 			}
 			
@@ -131,6 +138,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 					
 					
 					NSString *userID = [line stringBetweenString:@"\"" andString:@"\"" needEnd:YES];
+					NSString *email, *comment;
 					
 					if (userID) {
 						[descriptionTemplate replaceOccurrencesOfString:@"%USERID" withString:userID options:0 range:NSMakeRange(0, descriptionTemplate.length)];
@@ -143,7 +151,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 							range.location += 2;
 							range.length = textLength - range.location - 1;
 							
-							NSString *email = [userID substringWithRange:range];
+							email = [userID substringWithRange:range];
 							[descriptionTemplate replaceOccurrencesOfString:@"%EMAIL" withString:email options:0 range:NSMakeRange(0, descriptionTemplate.length)];
 							
 							userID = [userID substringToIndex:range.location - 2];
@@ -156,7 +164,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 							range.location += 2;
 							range.length = textLength - range.location - 1;
 							
-							NSString *comment = [userID substringWithRange:range];
+							comment = [userID substringWithRange:range];
 							[descriptionTemplate replaceOccurrencesOfString:@"%COMMENT" withString:comment options:0 range:NSMakeRange(0, descriptionTemplate.length)];
 							
 							userID = [userID substringToIndex:range.location - 2];
@@ -164,6 +172,8 @@ static int mac_cmd_handler (pinentry_t pe) {
 						
 						// Now, userID only contains the name.
 						[descriptionTemplate replaceOccurrencesOfString:@"%NAME" withString:userID options:0 range:NSMakeRange(0, descriptionTemplate.length)];
+						
+						keychainLabel = [NSString stringWithFormat:@"%@ <%@> (%@)", userID, email ? email : @"", keyID ? keyID : @""];
 					}
 				}
 			}
@@ -177,6 +187,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 		if (iconPath.length > 0) {
 			NSImage *icon = [[NSImage alloc] initWithContentsOfFile:iconPath];
 			pinentry.icon = icon;
+			[NSApp setApplicationIconImage:icon];
 		}
 	}
 	
@@ -208,8 +219,8 @@ static int mac_cmd_handler (pinentry_t pe) {
 			return -1;
 		}
 		
-		if (pinentry.saveInKeychain && pe->cache_id) {
-			storePassphraseInKeychain(pe->cache_id, passphrase);
+		if (pinentry.saveInKeychain && cacheId) {
+			storePassphraseInKeychain(cacheId, pinentry.passphrase, keychainLabel);
 		}
 		
 		

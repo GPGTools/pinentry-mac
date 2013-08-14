@@ -15,5 +15,6 @@
  Programm erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
-void storePassphraseInKeychain(const char *key, const char *passphrase);
-char* getPassphraseFromKeychain(const char *key);
+void storePassphraseInKeychain(NSString *fingerprint, NSString *passphrase, NSString *label);
+NSString *getPassphraseFromKeychain(NSString *fingerprint);
+
