@@ -42,10 +42,10 @@
 	IBOutlet NSTextField *passphraseField;
 	IBOutlet NSTextField *securePassphraseField;	
 }
-@property (assign) NSWindow *window;
+@property (nonatomic, assign) NSWindow *window;
 
-@property (retain) NSString *descriptionText, *promptText, *errorText, *passphrase, *okButtonText, *cancelButtonText;
-@property BOOL grab, confirmMode, oneButton, saveInKeychain, canUseKeychain, showType;
+@property (nonatomic, retain) NSString *descriptionText, *promptText, *errorText, *passphrase, *okButtonText, *cancelButtonText;
+@property (nonatomic) BOOL grab, confirmMode, oneButton, saveInKeychain, canUseKeychain, showType;
 
 
 - (NSInteger)runModal;

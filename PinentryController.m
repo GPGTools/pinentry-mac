@@ -31,24 +31,10 @@ PinentryController *_sharedInstance = nil;
 - (id)init {
 	self = [super init];
 	
-	
-	descriptionText = nil;
-	promptText = nil;
-	errorText = nil;
-	passphrase = nil;
-	okButtonText = nil;
-	cancelButtonText = nil;
-	
-	confirmMode = NO;
-	oneButton = NO;
-	okPressed = NO;
-	canUseKeychain = NO;
-	
 	showType = [[GPGDefaults gpgDefaults] boolForKey:@"ShowPassphrase"];
 	saveInKeychain = [[GPGDefaults gpgDefaults] boolForKey:@"UseKeychain"];
 
 	[NSBundle loadNibNamed:@"Pinentry" owner:self];
-	
 	
 	return self;	
 }
