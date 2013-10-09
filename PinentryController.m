@@ -64,7 +64,7 @@ PinentryController *_sharedInstance = nil;
 
 - (NSImage *)icon {
 	if (!_icon) {
-		_icon = [[[NSBundle mainBundle] imageForResource:@"Icon"] retain];
+		_icon = [[NSImage imageNamed:@"Icon"] retain];
 	}
 	return [[_icon retain] autorelease];
 }
