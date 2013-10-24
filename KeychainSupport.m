@@ -39,38 +39,61 @@ void storePassphraseInKeychain(NSString *fingerprint, NSString *passphrase, NSSt
     }
 	
 	
-	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-								kSecClassGenericPassword, kSecClass,
-								@GPG_SERVICE_NAME, kSecAttrService,
-								fingerprint, kSecAttrAccount,
-								kCFBooleanTrue, kSecReturnRef,
-								keychainRef, kSecUseKeychain,
-								nil];
-
-	status = SecItemCopyMatching((CFDictionaryRef)attributes, (CFTypeRef *)&itemRef);
-	
-	
-	if (status == 0) {
-		if (passphrase) {
-			SecKeychainItemModifyAttributesAndData (itemRef, nil, [passphrase lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [passphrase UTF8String]);
+	if (NSAppKitVersionNumber >= NSAppKitVersionNumber10_7) {
+		
+		
+		NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+									kSecClassGenericPassword, kSecClass,
+									@GPG_SERVICE_NAME, kSecAttrService,
+									fingerprint, kSecAttrAccount,
+									kCFBooleanTrue, kSecReturnRef,
+									keychainRef, kSecUseKeychain,
+									nil];
+		
+		status = SecItemCopyMatching((CFDictionaryRef)attributes, (CFTypeRef *)&itemRef);
+		
+		
+		if (status == 0) {
+			if (passphrase) {
+				SecKeychainItemModifyAttributesAndData (itemRef, nil, [passphrase lengthOfBytesUsingEncoding:NSUTF8StringEncoding], passphrase.UTF8String);
+			} else {
+				SecKeychainItemDelete(itemRef);
+			}
+			CFRelease(itemRef);
 		} else {
-			SecKeychainItemDelete(itemRef);
+			if (passphrase) {
+				NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+											kSecClassGenericPassword, kSecClass,
+											@GPG_SERVICE_NAME, kSecAttrService,
+											fingerprint, kSecAttrAccount,
+											[passphrase dataUsingEncoding:NSUTF8StringEncoding], kSecValueData,
+											label ? label : @GPG_SERVICE_NAME, kSecAttrLabel,
+											keychainRef, kSecUseKeychain,
+											nil];
+				
+				SecItemAdd((CFDictionaryRef)attributes, nil);
+			}
 		}
-		CFRelease(itemRef);
-	} else {
-		if (passphrase) {
-			NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-										kSecClassGenericPassword, kSecClass,
-										@GPG_SERVICE_NAME, kSecAttrService,
-										fingerprint, kSecAttrAccount,
-										[passphrase dataUsingEncoding:NSUTF8StringEncoding], kSecValueData,
-										label ? label : @GPG_SERVICE_NAME, kSecAttrLabel,
-										keychainRef, kSecUseKeychain,
-										nil];
-			
-			SecItemAdd((CFDictionaryRef)attributes, nil);
+		
+	} else { /* Mac OS X 10.6 */
+		status = SecKeychainFindGenericPassword (keychainRef, strlen(GPG_SERVICE_NAME), GPG_SERVICE_NAME,
+												 [fingerprint lengthOfBytesUsingEncoding:NSUTF8StringEncoding], fingerprint.UTF8String, NULL, NULL, &itemRef);
+		if (status == 0) {
+			if (passphrase) {
+				SecKeychainItemModifyAttributesAndData (itemRef, NULL, [passphrase lengthOfBytesUsingEncoding:NSUTF8StringEncoding], passphrase.UTF8String);
+			} else {
+				SecKeychainItemDelete(itemRef);
+			}
+			CFRelease(itemRef);
+		} else {
+			if (passphrase) {
+				SecKeychainAddGenericPassword (keychainRef, strlen(GPG_SERVICE_NAME), GPG_SERVICE_NAME,
+											   [fingerprint lengthOfBytesUsingEncoding:NSUTF8StringEncoding], fingerprint.UTF8String, [passphrase lengthOfBytesUsingEncoding:NSUTF8StringEncoding], passphrase.UTF8String, NULL);
+			}
 		}
 	}
+	
+	
 	CFRelease(keychainRef);
 }
 
@@ -85,30 +108,51 @@ NSString *getPassphraseFromKeychain(NSString *fingerprint) {
         if(SecKeychainOpen(path, &keychainRef) != 0)
             return nil;
     }
-
 	
 	
-	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-								kSecClassGenericPassword, kSecClass,
-								@GPG_SERVICE_NAME, kSecAttrService,
-								fingerprint, kSecAttrAccount,
-								kCFBooleanTrue, kSecReturnData,
-								keychainRef, kSecUseKeychain,
-								nil];
 	
-	NSData *passphraseData = nil;
-	status = SecItemCopyMatching((CFDictionaryRef)attributes, (CFTypeRef *)&passphraseData);
+	NSString *passphrase = nil;
 	
-	
-	if (keychainRef) CFRelease(keychainRef);
-	
-	if (status != 0) {
-		return nil;
+	if (NSAppKitVersionNumber >= NSAppKitVersionNumber10_7) {
+		NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+									kSecClassGenericPassword, kSecClass,
+									@GPG_SERVICE_NAME, kSecAttrService,
+									fingerprint, kSecAttrAccount,
+									kCFBooleanTrue, kSecReturnData,
+									keychainRef, kSecUseKeychain,
+									nil];
+		NSData *passphraseData = nil;
+		
+		status = SecItemCopyMatching((CFDictionaryRef)attributes, (CFTypeRef *)&passphraseData);
+		
+		
+		if (keychainRef) CFRelease(keychainRef);
+		if (status != 0) {
+			return nil;
+		}
+		
+		passphrase = [[[NSString alloc] initWithData:passphraseData encoding:NSUTF8StringEncoding] autorelease];
+		
+		CFRelease(passphraseData);
+	} else { /* Mac OS X 10.6 */
+		UInt32 passphraseLength;
+		void *passphraseData = NULL;
+		
+		status = SecKeychainFindGenericPassword (keychainRef, strlen(GPG_SERVICE_NAME), GPG_SERVICE_NAME,
+												 [fingerprint lengthOfBytesUsingEncoding:NSUTF8StringEncoding], fingerprint.UTF8String, &passphraseLength, &passphraseData, NULL);
+		
+		
+		if (keychainRef) CFRelease(keychainRef);
+		if (status != 0) {
+			return nil;
+		}
+		
+		passphrase = [[[NSString alloc] initWithBytes:passphraseData length:passphraseLength encoding:NSUTF8StringEncoding] autorelease];
+		
+		
+		SecKeychainItemFreeContent(NULL, passphraseData);
 	}
 	
-	
-	NSString *passphrase = [[[NSString alloc] initWithData:passphraseData encoding:NSUTF8StringEncoding] autorelease];
-	CFRelease(passphraseData);
 	
 	return passphrase;
 }
