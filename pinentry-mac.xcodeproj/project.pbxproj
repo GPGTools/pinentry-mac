@@ -379,7 +379,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					HAVE_CONFIG_H,
 					FALLBACK_CURSES,
-					"CODE_SIGN_CHECK=$(CODE_SIGN)",
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/MacGPG2/libexec;
