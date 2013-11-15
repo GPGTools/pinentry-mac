@@ -11,3 +11,8 @@
 @interface NSString (BetweenExtension)
 - (NSString *)stringBetweenString:(NSString *)start andString:(NSString *)end needEnd:(BOOL)endNeeded;
 @end
+
+@interface NSString (gpgString)
++ (NSString *)gpgStringWithCString:(const char *)cString;
+@end
+

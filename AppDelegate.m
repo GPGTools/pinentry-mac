@@ -63,7 +63,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 	NSString *keychainLabel = nil;
 	NSString *cacheId = nil;
 	if (pe->cache_id) {
-		cacheId = [NSString stringWithUTF8String:pe->cache_id];
+		cacheId = [NSString gpgStringWithCString:pe->cache_id];
 	}
 	
 	// cache_id is used to save the passphrase in the Mac OS X keychain.
@@ -96,7 +96,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 	
 	NSString *description = nil;
 	if (pe->description) {
-		description = [[NSString stringWithUTF8String:pe->description] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+		description = [[NSString gpgStringWithCString:pe->description] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
 	}
 	
 	
@@ -108,7 +108,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 	NSString *userData = nil;
 	const char *cUserData = getenv("PINENTRY_USER_DATA");
 	if (cUserData) {
-		userData = [NSString stringWithUTF8String:cUserData];
+		userData = [NSString gpgStringWithCString:cUserData];
 	}
 	
 	
@@ -123,7 +123,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 		if (descriptionTemplate) {
 			NSString *keyID = nil;
 			if (pe->cache_id) { // Get KeyID from cache_id.
-				NSString *fingerprint = [NSString stringWithUTF8String:pe->cache_id];
+				NSString *fingerprint = [NSString gpgStringWithCString:pe->cache_id];
 				if (fingerprint) {
 					[descriptionTemplate replaceOccurrencesOfString:@"%FINGERPRINT" withString:fingerprint options:0 range:NSMakeRange(0, descriptionTemplate.length)];
 					keyID = [fingerprint substringFromIndex:fingerprint.length - 8];
@@ -194,15 +194,15 @@ static int mac_cmd_handler (pinentry_t pe) {
 	
 	if (pe->pin) { // want_pass.
 		if (pe->prompt)
-			pinentry.promptText = [NSString stringWithUTF8String:pe->prompt];
+			pinentry.promptText = [NSString gpgStringWithCString:pe->prompt];
 		if (description)
 			pinentry.descriptionText = description;
 		if (pe->ok)
-			pinentry.okButtonText = [NSString stringWithUTF8String:pe->ok];
+			pinentry.okButtonText = [NSString gpgStringWithCString:pe->ok];
 		if (pe->cancel)
-			pinentry.cancelButtonText = [NSString stringWithUTF8String:pe->cancel];
+			pinentry.cancelButtonText = [NSString gpgStringWithCString:pe->cancel];
 		if (pe->error)
-			pinentry.errorText = [NSString stringWithUTF8String:pe->error];
+			pinentry.errorText = [NSString gpgStringWithCString:pe->error];
 		if (pe->cache_id)
 			pinentry.canUseKeychain = YES;
 		
@@ -234,8 +234,8 @@ static int mac_cmd_handler (pinentry_t pe) {
 	} else {
 		pinentry.confirmMode = YES;
 		pinentry.descriptionText = description ? description : @"Confirm";
-		pinentry.okButtonText = pe->ok ? [NSString stringWithUTF8String:pe->ok] : nil;
-		pinentry.cancelButtonText = pe->cancel ? [NSString stringWithUTF8String:pe->cancel] : nil;
+		pinentry.okButtonText = pe->ok ? [NSString gpgStringWithCString:pe->ok] : nil;
+		pinentry.cancelButtonText = pe->cancel ? [NSString gpgStringWithCString:pe->cancel] : nil;
 		pinentry.oneButton = pe->one_button;
 		
 		NSInteger retVal = [pinentry runModal];
@@ -289,7 +289,6 @@ int pinentry_mac_is_curses_demanded() {
 
 
 @implementation NSString (BetweenExtension)
-
 - (NSString *)stringBetweenString:(NSString *)start andString:(NSString *)end needEnd:(BOOL)endNeeded {
 	NSRange range = [self rangeOfString:start];
 	NSUInteger location;
@@ -313,10 +312,93 @@ int pinentry_mac_is_curses_demanded() {
 	
 	return [self substringWithRange:range];
 }
-
 @end
 
+@implementation NSString (gpgString)
++ (NSString *)gpgStringWithCString:(const char *)cString {
+	if (!cString) {
+		return @"";
+	}
+	
+	unsigned long length = strlen(cString);
+	
+	if (length == 0) {
+		return @"";
+	}
 
-
-
-
+	NSString *retString = [NSString stringWithUTF8String:cString];
+	if (retString) {
+		return retString;
+	}
+	
+	
+	// Löschen aller ungültigen Zeichen, damit die umwandlung nach UTF-8 funktioniert.
+	const uint8_t *inText = (uint8_t *)cString;
+	
+	NSUInteger i = 0, c = length;
+	
+	uint8_t *outText = malloc(c + 1);
+	if (outText) {
+		uint8_t *outPos = outText;
+		const uint8_t *startChar = nil;
+		int multiByte = 0;
+		
+		for (; i < c; i++) {
+			if (multiByte && (*inText & 0xC0) == 0x80) { // Fortsetzung eines Mehrbytezeichen
+				multiByte--;
+				if (multiByte == 0) {
+					while (startChar <= inText) {
+						*(outPos++) = *(startChar++);
+					}
+				}
+			} else if ((*inText & 0x80) == 0) { // Normales ASCII Zeichen.
+				*(outPos++) = *inText;
+				multiByte = 0;
+			} else if ((*inText & 0xC0) == 0xC0) { // Beginn eines Mehrbytezeichen.
+				if (multiByte) {
+					*(outPos++) = '?';
+				}
+				if (*inText <= 0xDF && *inText >= 0xC2) {
+					multiByte = 1;
+					startChar = inText;
+				} else if (*inText <= 0xEF && *inText >= 0xE0) {
+					multiByte = 2;
+					startChar = inText;
+				} else if (*inText <= 0xF4 && *inText >= 0xF0) {
+					multiByte = 3;
+					startChar = inText;
+				} else {
+					*(outPos++) = '?';
+					multiByte = 0;
+				}
+			} else {
+				*(outPos++) = '?';
+			}
+			
+			inText++;
+		}
+		*outPos = 0;
+		
+		
+		retString = [NSString gpgStringWithCString:(char *)outText];
+		
+		free(outText);
+		if (retString) {
+			return retString;
+		}
+	}
+	// Ende der Säuberung.
+	
+	
+	
+	int encodings[3] = {NSISOLatin1StringEncoding, NSISOLatin2StringEncoding, NSASCIIStringEncoding};
+	for(i = 0; i < 3; i++) {
+		retString = [NSString stringWithCString:cString encoding:encodings[i]];
+		if (retString.length > 0) {
+			return retString;
+		}
+	}
+	
+	return retString;
+}
+@end
