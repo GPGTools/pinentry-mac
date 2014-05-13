@@ -37,12 +37,12 @@ int pinentry_mac_is_curses_demanded();
 	/* Consumes all arguments.  */
 	
 	if (pinentry_parse_opts(*_NSGetArgc(), *_NSGetArgv())) {
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+		@autoreleasepool {
 		
-		const char *version = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] UTF8String];
-		printf("pinentry-mac (pinentry) %s \n", version);
+			const char *version = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] UTF8String];
+			printf("pinentry-mac (pinentry) %s \n", version);
 		
-		[pool drain];
+		}
 		exit(0);
     }
 	
@@ -58,7 +58,7 @@ int pinentry_mac_is_curses_demanded();
 
 
 static int mac_cmd_handler (pinentry_t pe) {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
 	NSString *keychainLabel = nil;
 	NSString *cacheId = nil;
@@ -78,10 +78,8 @@ static int mac_cmd_handler (pinentry_t pe) {
 				pinentry_setbufferlen(pe, len + 1);
 				if (pe->pin) {
 					strcpy(pe->pin, passphrase);
-					[pool drain];
 					return len;
 				} else {
-					[pool drain];
 					return -1;
 				}
 			}				
@@ -90,7 +88,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 	
 	
 	
-	PinentryController *pinentry = [[[PinentryController alloc] init] autorelease];
+	PinentryController *pinentry = [[PinentryController alloc] init];
 	
 	pinentry.grab = pe->grab;
 	
@@ -179,7 +177,6 @@ static int mac_cmd_handler (pinentry_t pe) {
 			}
 			
 			description = [descriptionTemplate stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-			[descriptionTemplate release];
 		}
 		
 		NSString *iconPath = [userData stringBetweenString:@"ICON=" andString:@"," needEnd:NO];
@@ -208,14 +205,12 @@ static int mac_cmd_handler (pinentry_t pe) {
 		
 		
 		if (![pinentry runModal]) {
-			[pool drain];
 			return -1;
 		}
 		
 		
 		const char *passphrase = [pinentry.passphrase ? pinentry.passphrase : @"" UTF8String];
 		if (!passphrase) {
-			[pool drain];
 			return -1;
 		}
 		
@@ -228,7 +223,6 @@ static int mac_cmd_handler (pinentry_t pe) {
 		pinentry_setbufferlen(pe, len + 1);
 		if (pe->pin) {
 			strcpy(pe->pin, passphrase);
-			[pool drain];
 			return len;
 		}
 	} else {
@@ -240,12 +234,12 @@ static int mac_cmd_handler (pinentry_t pe) {
 		
 		NSInteger retVal = [pinentry runModal];
 		
-		[pool drain];
 		return retVal;
 	}
 	
-	[pool drain];
+	
 	return -1; // Shouldn't get this far.
+	}
 }
 
 #ifdef FALLBACK_CURSES

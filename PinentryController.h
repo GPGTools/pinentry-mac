@@ -44,11 +44,11 @@
 	IBOutlet NSTextField *passphraseField;
 	IBOutlet NSTextField *securePassphraseField;	
 }
-@property (nonatomic, assign) NSWindow *window;
+@property (nonatomic, unsafe_unretained) NSWindow *window;
 
-@property (nonatomic, retain) NSString *descriptionText, *promptText, *errorText, *passphrase, *okButtonText, *cancelButtonText;
+@property (nonatomic, strong) NSString *descriptionText, *promptText, *errorText, *passphrase, *okButtonText, *cancelButtonText;
 @property (nonatomic) BOOL grab, confirmMode, oneButton, saveInKeychain, canUseKeychain, showType;
-@property (nonatomic, retain) NSImage *icon;
+@property (nonatomic, strong) NSImage *icon;
 
 
 - (NSInteger)runModal;

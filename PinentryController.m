@@ -64,9 +64,9 @@ PinentryController *_sharedInstance = nil;
 
 - (NSImage *)icon {
 	if (!_icon) {
-		_icon = [[NSImage imageNamed:@"Icon"] retain];
+		_icon = [NSImage imageNamed:@"Icon"];
 	}
-	return [[_icon retain] autorelease];
+	return _icon;
 }
 
 
@@ -74,8 +74,7 @@ PinentryController *_sharedInstance = nil;
 
 - (void)setOkButtonText:(NSString *)value {
 	if (value != okButtonText) {
-		[okButtonText release];
-		okButtonText = [value retain];
+		okButtonText = value;
 		[self updateButtonSizes];
 	}
 }
@@ -84,8 +83,7 @@ PinentryController *_sharedInstance = nil;
 }
 - (void)setCancelButtonText:(NSString *)value {
 	if (value != cancelButtonText) {
-		[cancelButtonText release];
-		cancelButtonText = [value retain];
+		cancelButtonText = value;
 		[self updateButtonSizes];
 	}	
 }

@@ -46,13 +46,13 @@ BOOL isBundleValidSigned(NSBundle *bundle) {
 
 int main(int argc, char *argv[]) {
 #ifdef CODE_SIGN_CHECK
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	/* Check the validity of the code signature. */
     if (!isBundleValidSigned([NSBundle mainBundle])) {
 		NSRunAlertPanel(@"Someone tampered with your installation of pinentry-mac!", @"To keep you safe, pinentry-mac will exit now!\n\nPlease download and install the latest version of GPG Suite from https://gpgtools.org to be sure you have an original version from us!", nil, nil, nil);
         return 1;
     }
-	[pool drain];
+	}
 #endif
 	
 	return NSApplicationMain(argc,  (const char **) argv);

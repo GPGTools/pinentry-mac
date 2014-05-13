@@ -25,7 +25,7 @@
 	NSSet *_defaultDictionarys;
 }
 
-@property (retain) NSString *domain;
+@property (strong) NSString *domain;
 
 + (id)gpgDefaults;
 + (id)standardDefaults;

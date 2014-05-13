@@ -45,7 +45,6 @@ static NSMutableDictionary *_sharedInstances = nil;
 	if (!defaultsController) {
 		defaultsController = [[self alloc] initWithDomain:domain];
 		[_sharedInstances setObject:defaultsController forKey:domain];
-		[defaultsController release];
 	}
 	return defaultsController;
 }
@@ -67,9 +66,7 @@ static NSMutableDictionary *_sharedInstances = nil;
 
 - (void)setDomain:(NSString *)value {
 	if (value != _domain) {
-		NSString *old = _domain;
-		_domain = [value retain];
-		[old release];
+		_domain = value;
 	}
 }
 - (NSString *)domain {
@@ -145,16 +142,14 @@ static NSMutableDictionary *_sharedInstances = nil;
 	[_defaultsLock lock];
 	NSDictionary *retDict = [self.defaults copy];
 	[_defaultsLock unlock];
-	return [retDict autorelease];
+	return retDict;
 }
 
 - (void)registerDefaults:(NSDictionary *)dictionary {
 	if (!_defaultDictionarys) {
 		_defaultDictionarys = [[NSSet alloc] initWithObjects:dictionary, nil];
 	} else {
-		NSSet *oldDictionary = _defaultDictionarys;
-		_defaultDictionarys = [[_defaultDictionarys setByAddingObject:dictionary] retain];
-		[oldDictionary release];
+		_defaultDictionarys = [_defaultDictionarys setByAddingObject:dictionary];
 	}
 }
 
@@ -170,20 +165,18 @@ static NSMutableDictionary *_sharedInstances = nil;
 
 - (void)refreshDefaults {
 	NSDictionary *dictionary = [[NSUserDefaults standardUserDefaults] persistentDomainForName:_domain];
-	NSMutableDictionary *old = _defaults;
 	if (dictionary) {
-		_defaults = [[dictionary mutableCopy] retain];
+		_defaults = [dictionary mutableCopy];
 	} else {
 		_defaults = [[NSMutableDictionary alloc] initWithCapacity:1];
 	}
-	[old release];
 }
 
 - (NSMutableDictionary *)defaults {
 	if (!_defaults) {
 		[self refreshDefaults];
 	}
-	return [[_defaults retain] autorelease];
+	return _defaults;
 }
 
 - (void)writeToDisk {
@@ -206,11 +199,7 @@ static NSMutableDictionary *_sharedInstances = nil;
 
 - (void)dealloc {
 	[[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
-	[_defaults release];
 	self.domain = nil;
-	[_defaultsLock release];
-	[_defaultDictionarys release];
-	[super dealloc];
 }
 
 @end

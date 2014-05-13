@@ -50,7 +50,7 @@ void storePassphraseInKeychain(NSString *fingerprint, NSString *passphrase, NSSt
 									keychainRef, kSecUseKeychain,
 									nil];
 		
-		status = SecItemCopyMatching((CFDictionaryRef)attributes, (CFTypeRef *)&itemRef);
+		status = SecItemCopyMatching((__bridge CFDictionaryRef)attributes, (CFTypeRef *)&itemRef);
 		
 		
 		if (status == 0) {
@@ -71,7 +71,7 @@ void storePassphraseInKeychain(NSString *fingerprint, NSString *passphrase, NSSt
 											keychainRef, kSecUseKeychain,
 											nil];
 				
-				SecItemAdd((CFDictionaryRef)attributes, nil);
+				SecItemAdd((__bridge CFDictionaryRef)attributes, nil);
 			}
 		}
 		
@@ -121,9 +121,9 @@ NSString *getPassphraseFromKeychain(NSString *fingerprint) {
 									kCFBooleanTrue, kSecReturnData,
 									keychainRef, kSecUseKeychain,
 									nil];
-		NSData *passphraseData = nil;
+		CFTypeRef passphraseData = nil;
 		
-		status = SecItemCopyMatching((CFDictionaryRef)attributes, (CFTypeRef *)&passphraseData);
+		status = SecItemCopyMatching((__bridge CFDictionaryRef)attributes, &passphraseData);
 		
 		
 		if (keychainRef) CFRelease(keychainRef);
@@ -131,7 +131,7 @@ NSString *getPassphraseFromKeychain(NSString *fingerprint) {
 			return nil;
 		}
 		
-		passphrase = [[[NSString alloc] initWithData:passphraseData encoding:NSUTF8StringEncoding] autorelease];
+		passphrase = [[NSString alloc] initWithData:(__bridge NSData *)passphraseData encoding:NSUTF8StringEncoding];
 		
 		CFRelease(passphraseData);
 	} else { /* Mac OS X 10.6 */
@@ -147,7 +147,7 @@ NSString *getPassphraseFromKeychain(NSString *fingerprint) {
 			return nil;
 		}
 		
-		passphrase = [[[NSString alloc] initWithBytes:passphraseData length:passphraseLength encoding:NSUTF8StringEncoding] autorelease];
+		passphrase = [[NSString alloc] initWithBytes:passphraseData length:passphraseLength encoding:NSUTF8StringEncoding];
 		
 		
 		SecKeychainItemFreeContent(NULL, passphraseData);
