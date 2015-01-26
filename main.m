@@ -27,6 +27,9 @@
 
 
 #import <Cocoa/Cocoa.h>
+#import "pinentry.h"
+
+extern pinentry_cmd_handler_t pinentry_cmd_handler;
 
 BOOL isBundleValidSigned(NSBundle *bundle) {
 	SecRequirementRef requirement = nil;
@@ -43,18 +46,79 @@ BOOL isBundleValidSigned(NSBundle *bundle) {
 }
 
 
+#ifdef FALLBACK_CURSES
+#import <pinentry-curses.h>
+
+/* On Mac, the DISPLAY environment variable, which is passed from
+ a session to gpg2 to gpg-agent to pinentry and which is used
+ on other platforms for falling back to curses, is not completely
+ reliable, since some Mac users do not use X11.
+ 
+ It might be valuable to submit patches so that gpg-agent could
+ automatically indicate the state of SSH_CONNECTION to pinentry,
+ which would be useful for OS X.
+ 
+ This pinentry-mac handling will recognize USE_CURSES=1 in
+ the environment variable PINENTRY_USER_DATA (which is
+ automatically passed from session to gpg2 to gpg-agent to
+ pinentry) to allow the user to specify that curses should be
+ initialized.
+ 
+ E.g. in .bashrc or .profile:
+ 
+ if test "$SSH_CONNECTION" != ""
+ then
+ export PINENTRY_USER_DATA="USE_CURSES=1"
+ fi
+ */
+int pinentry_mac_is_curses_demanded() {
+	const char *s;
+	
+	s = getenv ("PINENTRY_USER_DATA");
+	if (s && *s) {
+		return (strstr(s, "USE_CURSES=1") != NULL);
+	}
+	return 0;
+}
+#endif
+
+
+
 
 int main(int argc, char *argv[]) {
-#ifdef CODE_SIGN_CHECK
 	@autoreleasepool {
-	/* Check the validity of the code signature. */
-    if (!isBundleValidSigned([NSBundle mainBundle])) {
-		NSRunAlertPanel(@"Someone tampered with your installation of pinentry-mac!", @"To keep you safe, pinentry-mac will exit now!\n\nPlease download and install the latest version of GPG Suite from https://gpgtools.org to be sure you have an original version from us!", nil, nil, nil);
-        return 1;
-    }
-	}
+		
+#ifdef CODE_SIGN_CHECK
+		/* Check the validity of the code signature. */
+		if (!isBundleValidSigned([NSBundle mainBundle])) {
+			NSRunAlertPanel(@"Someone tampered with your installation of pinentry-mac!", @"To keep you safe, pinentry-mac will exit now!\n\nPlease download and install the latest version of GPG Suite from https://gpgtools.org to be sure you have an original version from us!", nil, nil, nil);
+			return 1;
+		}
 #endif
-	
-	return NSApplicationMain(argc,  (const char **) argv);
+		
+		pinentry_init("pinentry-mac");
+		
+		/* Consumes all arguments.  */
+		if (pinentry_parse_opts(argc, argv)) {
+			const char *version = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] UTF8String];
+			printf("pinentry-mac (pinentry) %s \n", version);
+			return 0;
+		}
+		
+		
+#ifdef FALLBACK_CURSES
+		if (pinentry_mac_is_curses_demanded()) {
+			// Only load the curses interface.
+			pinentry_cmd_handler = curses_cmd_handler;
+			if (pinentry_loop()) {
+				return 1;
+			}
+			return 0;
+		}
+#endif
+		
+		// Load GUI.
+		return NSApplicationMain(argc, (const char **)argv);
+	}
 }
 
