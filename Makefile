@@ -8,7 +8,8 @@ MAKE_DEFAULT = Dependencies/GPGTools_Core/newBuildSystem/Makefile.default
 
 .PRECIOUS: $(MAKE_DEFAULT)
 $(MAKE_DEFAULT):
-	@bash -c "$$(curl -fsSL https://raw.github.com/GPGTools/GPGTools_Core/master/newBuildSystem/prepare-core.sh)"
+	@echo "Dependencies/GPGTools_Core is missing.\nPlease clone it manually from https://github.com/GPGTools/GPGTools_Core\n"
+	@exit 1
 
 init: $(MAKE_DEFAULT)
 
