@@ -1,0 +1,11 @@
+CHECKSUM:
+
+The SHA256 Checksum of "checksum.rb" should be:
+     c22c89e2b2f21e881f4003991911916e64ffce5753ca40f514a867a62ad4d6b3
+
+The SHA256 Checksum of the downloaded "prepare-core.sh" file should be:
+     b84ceddd3c858bf72e7a5263fd8c67bd9dfe778e4b59a59c071ed772143418cd
+
+The latter is verified for you automatically during install.
+
+**INSERT GPG SIGNATURE OF MAINTAINER HERE**
