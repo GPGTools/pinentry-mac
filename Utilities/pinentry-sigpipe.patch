@@ -1,0 +1,18 @@
+--- a/pinentry/pinentry.c	
++++ b/pinentry/pinentry.c
+@@ -47,6 +47,7 @@
+ #include "memory.h"
+ #include "secmem-util.h"
+ #include "pinentry.h"
++#include <fcntl.h>
+ 
+ #ifdef HAVE_W32CE_SYSTEM
+ #define getpid() GetCurrentProcessId ()
+@@ -1209,5 +1210,7 @@ pinentry_loop2 (int infd, int outfd)
+ int
+ pinentry_loop (void)
+ {
++  fcntl(STDIN_FILENO, 73); // Disable SIGPIPE
++  fcntl(STDOUT_FILENO, 73); // Disable SIGPIPE
+   return pinentry_loop2 (STDIN_FILENO, STDOUT_FILENO);
+ }

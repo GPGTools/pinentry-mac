@@ -1,0 +1,36 @@
+--- a/pinentry/pinentry.c
++++ b/pinentry/pinentry.c
+@@ -98,7 +98,8 @@
+     NULL,        /* default_ok  */
+     NULL,        /* default_cancel  */
+     NULL,        /* default_prompt  */
+-    NULL         /* Assuan context.  */
++    NULL,        /* Assuan context.  */
++    NULL         /* cache_id  */
+   };
+ 
+ 
+@@ -701,6 +702,12 @@
+       if (!pinentry.default_prompt)
+ 	return ASSUAN_Out_Of_Core;
+     }
++  else if (!strcmp (key, "cache-id"))
++    {
++      pinentry.cache_id = strdup (value);
++      if (!pinentry.cache_id)
++    return ASSUAN_Out_Of_Core;
++    }
+   else
+     return ASSUAN_Invalid_Option;
+   return 0;
+--- a/pinentry/pinentry.h
++++ b/pinentry/pinentry.h
+@@ -150,6 +150,8 @@
+      to save the assuan ctx.  */
+   void *ctx_assuan;
+ 
++  char *cache_id;
++
+ };
+ typedef struct pinentry *pinentry_t;
+ 
