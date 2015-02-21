@@ -264,6 +264,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "pushd \"$SRCROOT\" > /dev/null\n\nUtilities/localizeXIB English.lproj/Pinentry.xib German\n\npopd > /dev/null";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
