@@ -17,3 +17,17 @@ profile
 .DS_Store
 Dependencies/GPGTools_Core
 Dependencies/Libmacgpg
+
+# pinentry sources
+Source/pinentry-*/**
+!Source/pinentry-*/assuan/
+!Source/pinentry-*/assuan/*.c
+!Source/pinentry-*/assuan/*.h
+!Source/pinentry-*/pinentry/
+!Source/pinentry-*/pinentry/*.c
+!Source/pinentry-*/pinentry/*.h
+!Source/pinentry-*/secmem/
+!Source/pinentry-*/secmem/*.c
+!Source/pinentry-*/secmem/*.h
+!Source/pinentry-*/config.h
+
