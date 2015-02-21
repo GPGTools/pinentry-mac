@@ -198,6 +198,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				30185C6B1A98CA980025E008 /* Fill Info.plist */,
 			);
 			buildRules = (
 			);
@@ -251,6 +252,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		30185C6B1A98CA980025E008 /* Fill Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Fill Info.plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source \"$SRCROOT/Makefile.config\" || exit 1\n\nPLIST=\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"\n\n/usr/libexec/PlistBuddy -c \"Set CommitHash '$COMMIT_HASH'\" -c \"Set BuildNumber '${BUILD_NUMBER:-0}'\" -c \"Set CFBundleVersion '$BUILD_VERSION'\" -c \"Set CFBundleShortVersionString '$VERSION'\" \"$PLIST\" || exit 2\n";
+		};
 		30FC955F129818AE0039CEF8 /* Localize XIBs */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,7 +346,6 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/MacGPG2/libexec;
 				PRODUCT_NAME = "pinentry-mac";
-				VERSION_ADDITION = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -352,7 +366,6 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/MacGPG2/libexec;
 				PRODUCT_NAME = "pinentry-mac";
-				VERSION_ADDITION = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
