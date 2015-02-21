@@ -265,6 +265,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "source \"$SRCROOT/Makefile.config\" || exit 1\n\nPLIST=\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"\n\n/usr/libexec/PlistBuddy -c \"Set CommitHash '$COMMIT_HASH'\" -c \"Set BuildNumber '${BUILD_NUMBER:-0}'\" -c \"Set CFBundleVersion '$BUILD_VERSION'\" -c \"Set CFBundleShortVersionString '$VERSION'\" \"$PLIST\" || exit 2\n";
+			showEnvVarsInLog = 0;
 		};
 		30FC955F129818AE0039CEF8 /* Localize XIBs */ = {
 			isa = PBXShellScriptBuildPhase;
