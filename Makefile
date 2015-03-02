@@ -6,7 +6,7 @@ CONFIG = Release
 all: $(PRODUCT)
 
 $(PRODUCT): Source/* Source/pinentry-current/* Source/pinentry-current/*/* Resources/* Resources/*/* pinentry-mac.xcodeproj
-	@xcodebuild -project $(PROJECT).xcodeproj -target $(TARGET) -configuration $(CONFIG) build $(XCCONFIG)
+	xcodebuild -project $(PROJECT).xcodeproj -target $(TARGET) -configuration $(CONFIG) build $(XCCONFIG)
 
 clean:
 	rm -rf ./build
