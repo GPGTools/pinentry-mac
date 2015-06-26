@@ -49,47 +49,38 @@ void storePassphraseInKeychain(NSString *fingerprint, NSString *passphrase, NSSt
 									kCFBooleanTrue, kSecReturnRef,
 									keychainRef, kSecUseKeychain,
 									nil];
-		
-		status = SecItemCopyMatching((__bridge CFDictionaryRef)attributes, (CFTypeRef *)&itemRef);
-		
-		
+
+		int status = SecItemCopyMatching((__bridge CFDictionaryRef)attributes, (CFTypeRef *)&itemRef);
 		if (status == 0) {
-			if (passphrase) {
-				SecKeychainItemModifyAttributesAndData (itemRef, nil, [passphrase lengthOfBytesUsingEncoding:NSUTF8StringEncoding], passphrase.UTF8String);
-			} else {
-				SecKeychainItemDelete(itemRef);
-			}
+			SecKeychainItemDelete(itemRef);
 			CFRelease(itemRef);
-		} else {
-			if (passphrase) {
-				NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-											kSecClassGenericPassword, kSecClass,
-											@GPG_SERVICE_NAME, kSecAttrService,
-											fingerprint, kSecAttrAccount,
-											[passphrase dataUsingEncoding:NSUTF8StringEncoding], kSecValueData,
-											label ? label : @GPG_SERVICE_NAME, kSecAttrLabel,
-											keychainRef, kSecUseKeychain,
-											nil];
-				
-				SecItemAdd((__bridge CFDictionaryRef)attributes, nil);
-			}
 		}
-		
+
+
+		if (passphrase) {
+			attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+						  kSecClassGenericPassword, kSecClass,
+						  @GPG_SERVICE_NAME, kSecAttrService,
+						  fingerprint, kSecAttrAccount,
+						  [passphrase dataUsingEncoding:NSUTF8StringEncoding], kSecValueData,
+						  label ? label : @GPG_SERVICE_NAME, kSecAttrLabel,
+						  keychainRef, kSecUseKeychain,
+						  nil];
+
+			SecItemAdd((__bridge CFDictionaryRef)attributes, nil);
+		}
+
 	} else { /* Mac OS X 10.6 */
 		status = SecKeychainFindGenericPassword (keychainRef, strlen(GPG_SERVICE_NAME), GPG_SERVICE_NAME,
 												 [fingerprint lengthOfBytesUsingEncoding:NSUTF8StringEncoding], fingerprint.UTF8String, NULL, NULL, &itemRef);
 		if (status == 0) {
-			if (passphrase) {
-				SecKeychainItemModifyAttributesAndData (itemRef, NULL, [passphrase lengthOfBytesUsingEncoding:NSUTF8StringEncoding], passphrase.UTF8String);
-			} else {
-				SecKeychainItemDelete(itemRef);
-			}
+			SecKeychainItemDelete(itemRef);
 			CFRelease(itemRef);
-		} else {
-			if (passphrase) {
-				SecKeychainAddGenericPassword (keychainRef, strlen(GPG_SERVICE_NAME), GPG_SERVICE_NAME,
-											   [fingerprint lengthOfBytesUsingEncoding:NSUTF8StringEncoding], fingerprint.UTF8String, [passphrase lengthOfBytesUsingEncoding:NSUTF8StringEncoding], passphrase.UTF8String, NULL);
-			}
+		}
+
+		if (passphrase) {
+			SecKeychainAddGenericPassword (keychainRef, strlen(GPG_SERVICE_NAME), GPG_SERVICE_NAME,
+										   [fingerprint lengthOfBytesUsingEncoding:NSUTF8StringEncoding], fingerprint.UTF8String, [passphrase lengthOfBytesUsingEncoding:NSUTF8StringEncoding], passphrase.UTF8String, NULL);
 		}
 	}
 	
