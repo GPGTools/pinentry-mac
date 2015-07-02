@@ -87,7 +87,7 @@ int pinentry_mac_is_curses_demanded() {
 
 int main(int argc, char *argv[]) {
 	@autoreleasepool {
-		
+		usleep(100000);
 #ifdef CODE_SIGN_CHECK
 		/* Check the validity of the code signature. */
 		if (!isBundleValidSigned([NSBundle mainBundle])) {
@@ -98,12 +98,16 @@ int main(int argc, char *argv[]) {
 		
 		pinentry_init("pinentry-mac");
 		
+		
+		pinentry_parse_opts(argc, argv);
+		
 		/* Consumes all arguments.  */
-		if (pinentry_parse_opts(argc, argv)) {
+		if (false) {
 			const char *version = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] UTF8String];
 			printf("pinentry-mac (pinentry) %s \n", version);
 			return 0;
 		}
+		
 		
 		
 #ifdef FALLBACK_CURSES

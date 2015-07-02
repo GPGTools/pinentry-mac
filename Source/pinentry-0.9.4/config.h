@@ -12,6 +12,9 @@
 /* The GUI pinentries should fall back to curses if X is not available. */
 #define FALLBACK_CURSES 1
 
+/* Nod nod */
+/* #undef GCR_API_SUBJECT_TO_CHANGE */
+
 /* Defined if the mlock() call does not work */
 /* #undef HAVE_BROKEN_MLOCK */
 
@@ -36,6 +39,9 @@
 
 /* Define to 1 if you have the `rt' library (-lrt). */
 /* #undef HAVE_LIBRT */
+
+/* The pinentries should optionally cache the passphrase using libsecret. */
+/* #undef HAVE_LIBSECRET */
 
 /* Define to 1 if you have the <locale.h> header file. */
 #define HAVE_LOCALE_H 1
@@ -116,7 +122,7 @@
 #define PACKAGE_NAME "pinentry"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "pinentry 0.9.0"
+#define PACKAGE_STRING "pinentry 0.9.4"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "pinentry"
@@ -125,7 +131,7 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.9.0"
+#define PACKAGE_VERSION "0.9.4"
 
 /* The Curses version of Pinentry is to be build */
 #define PINENTRY_CURSES 1
@@ -171,7 +177,7 @@
 
 
 /* Version number of package */
-#define VERSION "0.9.0"
+#define VERSION "0.9.4"
 
 /* Define to 1 if on MINIX. */
 /* #undef _MINIX */

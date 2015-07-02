@@ -34,6 +34,10 @@ static int mac_cmd_handler (pinentry_t pe) {
 	NSString *cacheId = nil;
 	if (pe->cache_id) {
 		cacheId = [NSString gpgStringWithCString:pe->cache_id];
+	} else if (pe->keyinfo) {
+		if (strlen(pe->keyinfo) > 2) {
+			cacheId = [NSString gpgStringWithCString:pe->keyinfo+2];
+		}
 	}
 	
 	// cache_id is used to save the passphrase in the Mac OS X keychain.
@@ -170,7 +174,7 @@ static int mac_cmd_handler (pinentry_t pe) {
 			pinentry.cancelButtonText = [NSString gpgStringWithCString:pe->cancel];
 		if (pe->error)
 			pinentry.errorText = [NSString gpgStringWithCString:pe->error];
-		if (pe->cache_id)
+		if (cacheId)
 			pinentry.canUseKeychain = YES;
 		
 		

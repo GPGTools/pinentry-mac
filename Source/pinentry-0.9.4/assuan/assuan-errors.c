@@ -49,6 +49,9 @@ assuan_strerror (AssuanError err)
     case ASSUAN_Invalid_Option: s="invalid option"; break;
     case ASSUAN_Locale_Problem: s="locale problem"; break;
     case ASSUAN_Not_Confirmed: s="not confirmed"; break;
+    case ASSUAN_Too_Short: s="too short"; break;
+    case ASSUAN_ENOENT: s="enoent"; break;
+    case ASSUAN_ENOTTY: s="enotty"; break;
     default:  sprintf (buf, "ec=%d", err ); s=buf; break;
     }
 

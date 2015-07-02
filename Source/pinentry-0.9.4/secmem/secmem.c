@@ -1,5 +1,6 @@
 /* secmem.c  -	memory allocation from a secure heap
  *	Copyright (C) 1998, 1999, 2003 Free Software Foundation, Inc.
+ *      Copyright (C) 2015 g10 Code GmbH
  *
  * This file is part of GnuPG.
  *
@@ -362,6 +363,9 @@ secmem_malloc( size_t size )
     if( cur_blocks > max_blocks )
 	max_blocks = cur_blocks;
 
+    memset (&mb->u.aligned.c, 0,
+	    size - (size_t) &((struct memblock_struct *) 0)->u.aligned.c);
+
     return &mb->u.aligned.c;
 }
 
@@ -372,6 +376,9 @@ secmem_realloc( void *p, size_t newsize )
     MEMBLOCK *mb;
     size_t size;
     void *a;
+
+    if (! p)
+      return secmem_malloc(newsize);
 
     mb = (MEMBLOCK*)((char*)p - ((size_t) &((MEMBLOCK*)0)->u.aligned.c));
     size = mb->size;

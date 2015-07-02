@@ -15,6 +15,8 @@
 		305E262A1296948200CF5467 /* GPGDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 305E26291296948200CF5467 /* GPGDefaults.m */; };
 		305E2C4D129734A100CF5467 /* KeychainSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 305E2C4C129734A100CF5467 /* KeychainSupport.m */; };
 		305E2D09129734E300CF5467 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 305E2D08129734E300CF5467 /* Security.framework */; };
+		309769901B4561D900CEF4F6 /* argparse.c in Sources */ = {isa = PBXBuildFile; fileRef = 3097698E1B4561D900CEF4F6 /* argparse.c */; };
+		309769931B4561E600CEF4F6 /* password-cache.c in Sources */ = {isa = PBXBuildFile; fileRef = 309769911B4561E600CEF4F6 /* password-cache.c */; };
 		30FC94811297E81A0039CEF8 /* Pinentry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30FC94801297E81A0039CEF8 /* Pinentry.xib */; };
 		4354B56E0A29D531003EB704 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 4354B56D0A29D531003EB704 /* COPYING */; };
 		438EE3050A1C6E570005741F /* assuan-buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 438EE2FD0A1C6E560005741F /* assuan-buffer.c */; };
@@ -50,6 +52,10 @@
 		305E2C4B129734A100CF5467 /* KeychainSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainSupport.h; path = Source/KeychainSupport.h; sourceTree = "<group>"; };
 		305E2C4C129734A100CF5467 /* KeychainSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainSupport.m; path = Source/KeychainSupport.m; sourceTree = "<group>"; };
 		305E2D08129734E300CF5467 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		3097698E1B4561D900CEF4F6 /* argparse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = argparse.c; path = "Source/pinentry-0.9.4/pinentry/argparse.c"; sourceTree = "<group>"; };
+		3097698F1B4561D900CEF4F6 /* argparse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = argparse.h; path = "Source/pinentry-0.9.4/pinentry/argparse.h"; sourceTree = "<group>"; };
+		309769911B4561E600CEF4F6 /* password-cache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "password-cache.c"; path = "Source/pinentry-0.9.4/pinentry/password-cache.c"; sourceTree = "<group>"; };
+		309769921B4561E600CEF4F6 /* password-cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "password-cache.h"; path = "Source/pinentry-0.9.4/pinentry/password-cache.h"; sourceTree = "<group>"; };
 		30FC956B129819310039CEF8 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/Pinentry.xib.strings; sourceTree = "<group>"; };
 		30FC956D129819390039CEF8 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = Resources/German.lproj/Pinentry.xib.strings; sourceTree = "<group>"; };
 		30FC957412981A040039CEF8 /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = Resources/German.lproj/Pinentry.xib; sourceTree = "<group>"; };
@@ -175,6 +181,10 @@
 				438EE3030A1C6E560005741F /* assuan-util.c */,
 				438EE3150A1C6EB30005741F /* config.h */,
 				438EE30E0A1C6E860005741F /* memory.h */,
+				3097698E1B4561D900CEF4F6 /* argparse.c */,
+				3097698F1B4561D900CEF4F6 /* argparse.h */,
+				309769911B4561E600CEF4F6 /* password-cache.c */,
+				309769921B4561E600CEF4F6 /* password-cache.h */,
 				438EE30B0A1C6E700005741F /* pinentry.c */,
 				438EE30C0A1C6E700005741F /* pinentry.h */,
 				45A0BB27150FC624005C15B2 /* pinentry-curses.c */,
@@ -314,6 +324,7 @@
 				438EE30A0A1C6E570005741F /* assuan-util.c in Sources */,
 				438EE30D0A1C6E700005741F /* pinentry.c in Sources */,
 				438EE3130A1C6E860005741F /* secmem.c in Sources */,
+				309769931B4561E600CEF4F6 /* password-cache.c in Sources */,
 				438EE3140A1C6E860005741F /* util.c in Sources */,
 				438EE31B0A1C70B80005741F /* PinentryController.m in Sources */,
 				305E262A1296948200CF5467 /* GPGDefaults.m in Sources */,
@@ -321,6 +332,7 @@
 				3025AFF21361D9830038F6BA /* ShortcutHandlingFields.m in Sources */,
 				45A0BB29150FC624005C15B2 /* pinentry-curses.c in Sources */,
 				30065823158488940033E1D3 /* AppDelegate.m in Sources */,
+				309769901B4561D900CEF4F6 /* argparse.c in Sources */,
 				300A90FE18B8DA2800B87295 /* PassphraseLengthFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
