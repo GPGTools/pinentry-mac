@@ -305,7 +305,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "pushd \"$SRCROOT\" > /dev/null\n\nUtilities/localizeXIB English.lproj/Pinentry.xib German\n\npopd > /dev/null";
+			shellScript = "[[ \"$LOCALIZE\" == \"NO\" ]] && exit 0\n[[ -d \"$DEPLOY_RESOURCES_DIR\" ]] || exit 0\n\nalias localizeXIB=\"$DEPLOY_RESOURCES_DIR/bin/localizeXIB\"\nignore=\"$DEPLOY_RESOURCES_DIR/config/l10n_ignored_strings.txt\"\nlangs=\"German\"\nsourceDir=Resources/English.lproj\n\nlocalizeXIB -i \"$ignore\" $sourceDir/Pinentry.xib     $langs || exit 1\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
