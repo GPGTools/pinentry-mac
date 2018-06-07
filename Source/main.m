@@ -47,7 +47,7 @@ BOOL isBundleValidSigned(NSBundle *bundle) {
 
 
 #ifdef FALLBACK_CURSES
-#import <pinentry-curses.h>
+#import "pinentry-curses.h"
 
 /* On Mac, the DISPLAY environment variable, which is passed from
  a session to gpg2 to gpg-agent to pinentry and which is used
