@@ -5,7 +5,7 @@
 #import "KeychainSupport.h"
 #import "pinentry.h"
 #ifdef FALLBACK_CURSES
-#include <pinentry-curses.h>
+#include "pinentry-curses.h"
 #endif
 
 
