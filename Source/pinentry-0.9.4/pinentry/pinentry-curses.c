@@ -44,7 +44,7 @@
 #include <utime.h>
 #endif /*HAVE_UTIME_H*/
 
-#include <memory.h>
+#include "memory.h"
 
 #ifdef HAVE_WCHAR_H
 #include <wchar.h>
