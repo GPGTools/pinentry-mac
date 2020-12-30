@@ -421,7 +421,7 @@
 				);
 				PREBINDING = NO;
 				SDKROOT = macosx;
-				VALID_ARCHS = "i386 x86_64 ppc";
+				VALID_ARCHS = "i386 x86_64 ppc arm64";
 			};
 			name = Debug;
 		};
@@ -444,7 +444,7 @@
 				);
 				PREBINDING = NO;
 				SDKROOT = macosx;
-				VALID_ARCHS = "i386 x86_64 ppc";
+				VALID_ARCHS = "i386 x86_64 ppc arm64";
 			};
 			name = Release;
 		};
